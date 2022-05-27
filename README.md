@@ -21,7 +21,7 @@ Android SwipeDrawer滑动抽屉库，可同时添加上下左右四个方向抽�
 
     dependencies {
         ...
-        implementation 'cn.Leaqi.SwipeDrawer:1.0'
+        implementation 'cn.Leaqi:SwipeDrawer:1.0'
     }
 
 在布局文件中加入 `SwipeDrawer` ：
