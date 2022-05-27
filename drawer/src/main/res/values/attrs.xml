@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeDrawer">
+        <attr name="mode" format="enum">
+            <enum name="drawer" value="0" />
+            <enum name="cover" value="1" />
+            <enum name="fixed" value="2" />
+        </attr>
+        <attr name="open" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+        <attr name="mask" format="enum">
+            <enum name="none" value="0" />
+            <enum name="general" value="1" />
+            <enum name="gradual" value="2" />
+        </attr>
+        <attr name="mainType" format="enum">
+            <enum name="view" value="0" />
+            <enum name="scrollY" value="1" />
+            <enum name="scrollX" value="2" />
+        </attr>
+        <attr name="leftMode" format="enum">
+            <enum name="drawer" value="0" />
+            <enum name="cover" value="1" />
+            <enum name="fixed" value="2" />
+        </attr>
+        <attr name="topMode" format="enum">
+            <enum name="drawer" value="0" />
+            <enum name="cover" value="1" />
+            <enum name="fixed" value="2" />
+        </attr>
+        <attr name="rightMode" format="enum">
+            <enum name="drawer" value="0" />
+            <enum name="cover" value="1" />
+            <enum name="fixed" value="2" />
+        </attr>
+        <attr name="bottomMode" format="enum">
+            <enum name="drawer" value="0" />
+            <enum name="cover" value="1" />
+            <enum name="fixed" value="2" />
+        </attr>
+        <attr name="leftType" format="enum">
+            <enum name="view" value="0" />
+            <enum name="scrollY" value="1" />
+            <enum name="scrollX" value="2" />
+        </attr>
+        <attr name="topType" format="enum">
+            <enum name="view" value="0" />
+            <enum name="scrollY" value="1" />
+            <enum name="scrollX" value="2" />
+        </attr>
+        <attr name="rightType" format="enum">
+            <enum name="view" value="0" />
+            <enum name="scrollY" value="1" />
+            <enum name="scrollX" value="2" />
+        </attr>
+        <attr name="bottomType" format="enum">
+            <enum name="view" value="0" />
+            <enum name="scrollY" value="1" />
+            <enum name="scrollX" value="2" />
+        </attr>
+        <attr name="mainOpen" format="enum">
+            <enum name="none" value="0" />
+            <enum name="click" value="1" />
+            <enum name="intercept" value="2" />
+        </attr>
+        <attr name="parentDrawer" format="reference" />
+        <attr name="mainScroll" format="reference" />
+        <attr name="leftScroll" format="reference" />
+        <attr name="topScroll" format="reference" />
+        <attr name="rightScroll" format="reference" />
+        <attr name="bottomScroll" format="reference" />
+        <attr name="mainLayout" format="reference" />
+        <attr name="leftLayout" format="reference" />
+        <attr name="topLayout" format="reference" />
+        <attr name="rightLayout" format="reference" />
+        <attr name="bottomLayout" format="reference" />
+        <attr name="leftDragOpen" format="boolean" />
+        <attr name="topDragOpen" format="boolean" />
+        <attr name="rightDragOpen" format="boolean" />
+        <attr name="bottomDragOpen" format="boolean" />
+        <attr name="showLayout" format="boolean" />
+        <attr name="autoClose" format="boolean" />
+        <attr name="maskClose" format="boolean" />
+        <attr name="maskColor" format="color" />
+        <attr name="dragClose" format="boolean" />
+        <attr name="scrollOuterDrag" format="boolean" />
+        <attr name="shrinkRange" format="float" />
+        <attr name="dragDamping" format="integer" />
+        <attr name="dragRange" format="dimension" />
+        <attr name="maxDragSize" format="dimension" />
+        <attr name="duration" format="integer" />
+        <attr name="interpolator" format="reference" />
+    </declare-styleable>
+</resources>

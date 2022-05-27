@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:id="@+id/mainDrawer"
+    android:background="@color/colorPrimary"
+    app:dragClose="false"
+    app:shrinkRange="1"
+    app:dragDamping="5"
+    app:maxDragSize="200dp"
+    app:mainScroll="@+id/mainList"
+    app:topLayout="@+id/topLayout">
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/reTopIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/icon_load" />
+        <TextView
+            android:id="@+id/reTopText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:text="下拉刷新" />
+    </LinearLayout>
+    <RelativeLayout style="@style/MainMatch">
+
+        <include layout="@layout/top_bar" />
+
+        <RelativeLayout style="@style/MainMatch" android:layout_below="@+id/top_bar">
+            <ScrollView style="@style/MainMatch" android:id="@+id/mainList">
+                <LinearLayout style="@style/MainWrap.Vertical">
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 1" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 2" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 3" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 4" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 5" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 6" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 7" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 8" />
+                    <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 9" />
+                </LinearLayout>
+            </ScrollView>
+            <TextView
+                style="@style/MainText"
+                android:id="@+id/gesture"
+                android:drawableTop="@mipmap/icon_top_black" />
+        </RelativeLayout>
+    </RelativeLayout>
+</cn.leaqi.drawer.SwipeDrawer>

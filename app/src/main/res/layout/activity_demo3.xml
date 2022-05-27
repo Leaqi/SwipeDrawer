@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" style="@style/MainMatch">
+
+    <include layout="@layout/top_bar" />
+
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/mainDrawer"
+        android:layout_below="@+id/top_bar"
+        app:mainScroll="@+id/mainList"
+        app:mask="gradual"
+        app:maskClose="true"
+        app:leftLayout="@+id/Left"
+        app:topLayout="@+id/Top"
+        app:rightLayout="@+id/Right"
+        app:bottomLayout="@+id/Bottom">
+        <TextView style="@style/MainText" android:layout_width="220dp" android:id="@+id/Left" android:background="#F44336" android:text="GridView\n\n外\n\nLeft" android:drawableRight="@mipmap/icon_right" />
+        <TextView style="@style/MainText" android:layout_height="220dp" android:id="@+id/Top" android:background="#E91E63" android:text="GridView\n\n外\n\nTop" android:drawableBottom="@mipmap/icon_bottom" />
+        <TextView style="@style/MainText" android:layout_width="220dp" android:id="@+id/Right" android:background="#9C27B0" android:text="GridView\n\n外\n\nRight" android:drawableLeft="@mipmap/icon_left" />
+        <TextView style="@style/MainText" android:layout_height="220dp" android:id="@+id/Bottom" android:background="#673AB7" android:text="GridView\n\n外\n\nBottom" android:drawableTop="@mipmap/icon_top" />
+        <RelativeLayout style="@style/MainMatch">
+            <GridView
+                style="@style/MainMatch"
+                android:id="@+id/mainList"
+                android:animateLayoutChanges="true"
+                android:clipToPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:stretchMode="columnWidth"
+                android:scrollbars="none"
+                android:numColumns="2" />
+            <TextView
+                style="@style/MainText"
+                android:id="@+id/gesture"
+                android:drawableLeft="@mipmap/icon_left_black"
+                android:drawableRight="@mipmap/icon_right_black"
+                android:drawableTop="@mipmap/icon_top_black"
+                android:drawableBottom="@mipmap/icon_bottom_black" />
+        </RelativeLayout>
+    </cn.leaqi.drawer.SwipeDrawer>
+
+</RelativeLayout>

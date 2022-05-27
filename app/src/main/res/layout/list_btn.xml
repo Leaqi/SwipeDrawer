@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainBtn"
+    app:leftLayout="@+id/btnLeft"
+    app:rightLayout="@+id/btnRight"
+    app:topLayout="@+id/btnTop"
+    app:bottomLayout="@+id/btnBottom">
+    <TextView android:id="@+id/btnLeft" style="@style/BtnText.Fixed" android:background="@color/colorPrimaryDark" android:text="Demo1" />
+    <TextView android:id="@+id/btnRight" style="@style/BtnText.Fixed" android:background="@color/colorPrimaryDark" android:text="Demo1" />
+    <TextView android:id="@+id/btnTop" style="@style/BtnText" android:gravity="center" android:background="@color/colorPrimaryDark" android:text="Demo1" />
+    <TextView android:id="@+id/btnBottom" style="@style/BtnText" android:gravity="center" android:background="@color/colorPrimaryDark" android:text="Demo1" />
+    <TextView android:id="@+id/btnText" style="@style/BtnText" android:background="#3F51B5" android:text="ListView" />
+</cn.leaqi.drawer.SwipeDrawer>

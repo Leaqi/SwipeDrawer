@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch.Black"
+    android:id="@+id/rootDrawer"
+    app:mask="general"
+    app:maskColor="#00000000"
+    app:maskClose="true"
+    app:shrinkRange="8"
+    app:mainScroll="@+id/mainView"
+    app:leftLayout="@+id/leftLayout"
+    app:rightLayout="@+id/rightLayout"
+    app:bottomLayout="@+id/bottomLayout"
+    app:bottomMode="cover"
+    app:bottomDragOpen="false"
+    app:topLayout="@+id/topLayout"
+    app:topScroll="@+id/topList"
+    app:topMode="fixed"
+    app:topDragOpen="false">
+
+    <LinearLayout style="@style/MainMatch.Vertical" android:id="@+id/leftLayout" android:layout_width="260dp" android:background="@color/colorBg">
+        <include layout="@layout/user_menu" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/MainMatch.Vertical" android:id="@+id/rightLayout" android:background="@color/colorBg">
+        <include layout="@layout/user_home" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg">
+        <LinearLayout
+            android:id="@+id/topSoBox"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="center"
+                android:animateLayoutChanges="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/soBack"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:alpha="0.9"
+                    android:layout_marginRight="17dp"
+                    android:src="@mipmap/icon_back" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radius_so"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/send_icon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="start|center"
+                        android:src="@mipmap/icon_search" />
+                    <EditText
+                        android:id="@+id/soVal"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="6dp"
+                        android:background="@null"
+                        android:inputType="text"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="#eeeeee"
+                        android:textColorHint="#bbbbbb"
+                        android:textSize="16sp"
+                        android:hint="请输入搜索关键词" />
+                    <ImageView
+                        android:id="@+id/soCode"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="end|center"
+                        android:src="@mipmap/icon_ewm" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/soBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:text="搜索" />
+            </LinearLayout>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView style="@style/MainMatch" android:id="@+id/topList" android:layout_below="@+id/topSoBox" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/radius_bg_top"
+        android:orientation="vertical">
+        <LinearLayout style="@style/CloseTitle">
+            <TextView style="@style/CloseText.White" android:text="分享" />
+            <View style="@style/CloseMid" />
+            <ImageView style="@style/CloseIcon.White" android:id="@+id/shareClose" />
+        </LinearLayout>
+        <include layout="@layout/user_share" />
+    </LinearLayout>
+
+    <RelativeLayout style="@style/MainMatch" android:id="@+id/mainLayout">
+
+        <androidx.viewpager.widget.ViewPager style="@style/MainMatch" android:id="@+id/mainView" />
+
+        <FrameLayout style="@style/TabBox" android:id="@+id/topTab">
+            <com.google.android.material.tabs.TabLayout android:id="@+id/tabLayout" style="@style/TabMain" />
+            <ImageView
+                android:id="@+id/topSet"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/icon_set"
+                android:layout_gravity="start|center" />
+            <ImageView
+                android:id="@+id/topSo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/icon_so"
+                android:layout_gravity="end|center" />
+            <ImageView
+                android:id="@+id/topLoad"
+                android:visibility="gone"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_gravity="end|center"
+                android:background="@drawable/load_anim" />
+        </FrameLayout>
+
+    </RelativeLayout>
+</cn.leaqi.drawer.SwipeDrawer>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:background="@color/colorPrimary"
+    android:id="@+id/rootDrawer"
+    app:mainOpen="click"
+    app:shrinkRange="8"
+    app:leftLayout="@+id/leftLayout"
+    app:rightLayout="@+id/rightLayout">
+
+    <LinearLayout style="@style/MainMatch.Vertical" android:id="@+id/leftLayout" android:layout_width="260dp" android:background="@color/colorPrimary">
+        <include layout="@layout/user_menu" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/MainMatch.Vertical" android:id="@+id/rightLayout" android:background="#ffffff">
+        <include layout="@layout/user_info" />
+    </LinearLayout>
+
+    <RelativeLayout style="@style/MainMatch" android:id="@+id/mainLayout">
+
+        <include layout="@layout/top_bar" />
+
+        <RelativeLayout style="@style/MainMatch" android:layout_below="@+id/top_bar">
+            <GridView
+                style="@style/MainMatch"
+                android:id="@+id/mainList"
+                android:background="#ffffff"
+                android:clipToPadding="false"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:verticalSpacing="15dp"
+                android:horizontalSpacing="15dp"
+                android:stretchMode="columnWidth"
+                android:scrollbars="none"
+                android:numColumns="1" />
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="15dp" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:orientation="vertical">
+                <TextView
+                    android:id="@+id/modeDrawer"
+                    style="@style/FixedBtn"
+                    android:text="抽屉\n模式" />
+                <TextView
+                    android:id="@+id/modeCover"
+                    style="@style/FixedBtn"
+                    android:text="覆盖\n模式" />
+                <TextView
+                    android:id="@+id/modeFixed"
+                    style="@style/FixedBtn"
+                    android:text="固定\n模式" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/MainMatch" android:id="@+id/mask" android:alpha="0" android:background="#4D000000" />
+
+    </RelativeLayout>
+</cn.leaqi.drawer.SwipeDrawer>

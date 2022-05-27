@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainWrap"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="horizontal">
+    <cn.leaqi.drawerapp.Views.RadiusImage
+        android:id="@+id/item_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/icon_user"
+        app:radius="20dp" />
+    <LinearLayout style="@style/MainMatch.Vertical" android:paddingLeft="50dp" android:paddingRight="50dp">
+        <TextView
+            style="@style/MainWrap"
+            android:id="@+id/item_title"
+            android:textColor="#666666"
+            android:textSize="13sp" />
+        <TextView
+            style="@style/MainWrap"
+            android:id="@+id/item_text"
+            android:layout_marginTop="6dp"
+            android:lineSpacingMultiplier ="1.2"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+        <LinearLayout
+            style="@style/MainWrap"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_time"
+                android:textColor="#bbbbbb"
+                android:textSize="13sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/item_ref"
+                android:textColor="#999999"
+                android:textSize="13sp"
+                android:text="回复" />
+        </LinearLayout>
+    </LinearLayout>
+    <cn.leaqi.drawerapp.Views.TouchView
+        android:id="@+id/item_dig_box"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="26dp"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/item_dig_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/icon_dig_def" />
+        <TextView
+            android:id="@+id/item_dig_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#888888"
+            android:textSize="13sp" />
+    </cn.leaqi.drawerapp.Views.TouchView>
+</FrameLayout>

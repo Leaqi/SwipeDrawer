@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch.Vertical">
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/pageDrawer"
+        app:parentDrawer="@id/mainDrawer"
+        app:topLayout="@+id/Top"
+        app:bottomLayout="@+id/Bottom">
+        <TextView style="@style/MainText" android:id="@+id/Top" android:layout_height="220dp" android:background="#279EB3" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+        <TextView style="@style/MainText" android:id="@+id/Bottom" android:layout_height="220dp" android:background="#11CE8C" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+        <TextView style="@style/MainText" android:id="@+id/Main" android:background="#2196F3" android:drawableLeft="@mipmap/icon_left" android:drawableRight="@mipmap/icon_right" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+    </cn.leaqi.drawer.SwipeDrawer>
+</LinearLayout>

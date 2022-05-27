@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/UserHomeTabItem">
+    <TextView android:id="@+id/item_text" style="@style/UserHomeTabText" />
+</FrameLayout>

@@ -1,0 +1,53 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainWrap.Vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="10dp">
+
+    <LinearLayout style="@style/UserInfoBox" android:id="@+id/listItem1">
+        <LinearLayout style="@style/UserInfoItem" android:tag="家政服务">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_jzfw_1" />
+            <TextView style="@style/UserInfoItemText" android:text="家政服务" />
+        </LinearLayout>
+        <View style="@style/UserInfoBorder" />
+        <LinearLayout style="@style/UserInfoItem" android:tag="百货超市">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_bhcs_1" />
+            <TextView style="@style/UserInfoItemText" android:text="百货超市" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/UserInfoBox" android:id="@+id/listItem2">
+        <LinearLayout style="@style/UserInfoItem" android:tag="宠物天地">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_cwtd_1" />
+            <TextView style="@style/UserInfoItemText" android:text="宠物天地" />
+        </LinearLayout>
+        <View style="@style/UserInfoBorder" />
+        <LinearLayout style="@style/UserInfoItem" android:tag="私家好车">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_sjhc_1" />
+            <TextView style="@style/UserInfoItemText" android:text="私家好车" />
+        </LinearLayout>
+        <View style="@style/UserInfoBorder" />
+        <LinearLayout style="@style/UserInfoItem" android:tag="酒店预订">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_jdyd_1" />
+            <TextView style="@style/UserInfoItemText" android:text="酒店预订" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/UserInfoBox" android:id="@+id/listItem3">
+        <LinearLayout style="@style/UserInfoItem" android:tag="婚纱摄影">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_hssy_1" />
+            <TextView style="@style/UserInfoItemText" android:text="婚纱摄影" />
+        </LinearLayout>
+        <View style="@style/UserInfoBorder" />
+        <LinearLayout style="@style/UserInfoItem" android:tag="丽人美容">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_lrmr_1" />
+            <TextView style="@style/UserInfoItemText" android:text="丽人美容" />
+        </LinearLayout>
+        <View style="@style/UserInfoBorder" />
+        <LinearLayout style="@style/UserInfoItem" android:tag="婚庆礼仪">
+            <ImageView style="@style/UserInfoItemIcon" android:src="@mipmap/icon_hqly_1" />
+            <TextView style="@style/UserInfoItemText" android:text="婚庆礼仪" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

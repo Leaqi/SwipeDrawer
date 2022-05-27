@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:id="@+id/userMenu"
+    app:mainType="scrollY"
+    app:shrinkRange="0"
+    app:dragDamping="3"
+    app:topLayout="@+id/userMenuTop"
+    app:bottomLayout="@+id/userMenuBottom">
+    <View
+        android:id="@+id/userMenuTop"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+    <View
+        android:id="@+id/userMenuBottom"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+    <ScrollView
+        style="@style/MainMatch"
+        android:paddingLeft="25dp"
+        android:paddingRight="15dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="60dp">
+        <LinearLayout style="@style/MainWrap.Vertical" android:id="@+id/listItem">
+            <LinearLayout style="@style/MainWrap.Horizontal" android:layout_marginBottom="30dp" android:background="?android:attr/selectableItemBackground" android:tag="@string/app_name">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@mipmap/icon_user" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:gravity="start|center"
+                    android:textSize="18sp"
+                    android:textColor="#ffffff"
+                    android:text="@string/app_name" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="家政服务">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_jzfw" />
+                <TextView style="@style/UserMenuItemText" android:text="家政服务" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="丽人美容">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_lrmr" />
+                <TextView style="@style/UserMenuItemText" android:text="丽人美容" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="私家好车">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_sjhc" />
+                <TextView style="@style/UserMenuItemText" android:text="私家好车" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="百货超市">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_bhcs" />
+                <TextView style="@style/UserMenuItemText" android:text="百货超市" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="婚纱摄影">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_hssy" />
+                <TextView style="@style/UserMenuItemText" android:text="婚纱摄影" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="宠物天地">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_cwtd" />
+                <TextView style="@style/UserMenuItemText" android:text="宠物天地" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="酒店预订">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_jdyd" />
+                <TextView style="@style/UserMenuItemText" android:text="酒店预订" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserMenuItem" android:tag="婚庆礼仪">
+                <ImageView style="@style/UserMenuItemIcon" android:src="@mipmap/icon_hqly" />
+                <TextView style="@style/UserMenuItemText" android:text="婚庆礼仪" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</cn.leaqi.drawer.SwipeDrawer>

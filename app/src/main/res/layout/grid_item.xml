@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainWrap.White"
+    android:id="@+id/itemDrawer"
+    app:duration="150"
+    app:parentDrawer="@+id/mainDrawer"
+    app:leftLayout="@+id/itemLeft"
+    app:rightLayout="@+id/itemRight">
+    <LinearLayout
+        android:id="@+id/itemLeft"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:background="#8BC34A">
+        <TextView
+            style="@style/MainMatch"
+            android:id="@+id/itemDing"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:text="置顶" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/itemRight"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/itemDel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#F44336"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:text="删除" />
+        <TextView
+            android:id="@+id/itemClose"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FF9800"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:text="关闭" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/itemMain"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            style="@style/MainWrap"
+            android:id="@+id/item_title"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            style="@style/MainWrap"
+            android:id="@+id/item_text"
+            android:layout_marginTop="3dp"
+            android:textColor="#666666"
+            android:textSize="15sp"
+            android:text="左右滑动打开菜单" />
+    </LinearLayout>
+</cn.leaqi.drawer.SwipeDrawer>

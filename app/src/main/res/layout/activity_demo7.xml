@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch">
+
+    <include layout="@layout/top_bar" />
+
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/rootDrawer"
+        android:layout_below="@+id/top_bar"
+        app:mode="cover"
+        app:mask="gradual"
+        app:maskClose="true"
+        app:shrinkRange="8"
+        app:dragRange="15dp"
+        app:leftLayout="@+id/leftLayout"
+        app:rightLayout="@+id/rightLayout"
+        app:topLayout="@+id/topLayout"
+        app:bottomLayout="@+id/bottomLayout">
+
+        <LinearLayout style="@style/MainMatch.Vertical" android:layout_width="300dp" android:id="@+id/leftLayout" android:background="@color/colorPrimary">
+            <include layout="@layout/user_menu" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/MainMatch.Vertical" android:layout_width="300dp" android:id="@+id/rightLayout" android:background="@color/colorPrimary">
+            <include layout="@layout/user_info" />
+        </LinearLayout>
+
+        <TextView style="@style/MainText" android:layout_height="220dp" android:id="@+id/topLayout" android:background="#E91E63" android:text="Top" android:drawableBottom="@mipmap/icon_bottom" />
+        <TextView style="@style/MainText" android:layout_height="220dp" android:id="@+id/bottomLayout" android:background="#673AB7" android:text="Bottom" android:drawableTop="@mipmap/icon_top" />
+
+        <RelativeLayout style="@style/MainMatch" android:background="#1FD101" android:id="@+id/mainLayout">
+
+            <LinearLayout style="@style/MainMatch" android:background="#4D000000" android:layout_margin="15dp">
+                <TextView style="@style/MainText" android:text="绿色边缘处才能拖拽" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </cn.leaqi.drawer.SwipeDrawer>
+</RelativeLayout>

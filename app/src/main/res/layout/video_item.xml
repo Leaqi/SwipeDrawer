@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:id="@+id/itemDrawer"
+    app:parentDrawer="@+id/rootDrawer"
+    app:mainOpen="intercept"
+    app:mode="cover"
+    app:mask="general"
+    app:maskColor="#00ffffff"
+    app:maskClose="true"
+    app:scrollOuterDrag="true"
+    app:shrinkRange="10"
+    app:dragRange="-1px"
+    app:bottomScroll="@+id/itemComment"
+    app:bottomLayout="@+id/bottomLayout">
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:background="@drawable/radius_white_top">
+        <LinearLayout style="@style/CloseTitle">
+            <TextView style="@style/CloseText" android:text="评论" />
+            <View style="@style/CloseMid" />
+            <ImageView style="@style/CloseIcon" android:id="@+id/sayClose" />
+        </LinearLayout>
+        <include layout="@layout/user_comment" />
+    </LinearLayout>
+    <RelativeLayout style="@style/MainMatch" android:background="#000000">
+        <ImageView style="@style/MainMatch" android:layout_gravity="center" android:id="@+id/itemImg" />
+        <FrameLayout style="@style/MainMatch" android:id="@+id/itemVideoBox">
+            <cn.leaqi.drawerapp.Views.VideoPlay
+                style="@style/MainMatch"
+                android:id="@+id/itemVideo"
+                android:layout_gravity="center"
+                android:alpha="0"
+                app:playId="@+id/videoPlay"
+                app:pauseId="@+id/videoPause"
+                app:seekId="@+id/videoSeekBar"
+                app:loadId="@+id/videoLoad" />
+            <View style="@style/MainMatch" android:id="@+id/videoPause" android:visibility="gone" />
+            <FrameLayout style="@style/MainMatch" android:id="@+id/videoPlay" android:visibility="gone">
+                <ImageView
+                    android:layout_width="66dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center"
+                    android:alpha="0.5"
+                    android:src="@mipmap/icon_play" />
+            </FrameLayout>
+            <SeekBar
+                android:id="@+id/videoSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
+                android:paddingEnd="0dp"
+                android:paddingStart="0dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_gravity="bottom"
+                android:thumbOffset="0dp"
+                android:maxHeight="2dp"
+                android:thumb="@drawable/seek_video_thumb"
+                android:progressDrawable="@drawable/seek_video_layer"
+                android:max="100" />
+            <View
+                android:id="@+id/videoLoad"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.7"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="bottom|center"
+                android:background="#ffffff" />
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/infoBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="90dp"
+            android:layout_marginBottom="25dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/itemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textStyle="bold"
+                android:gravity="start|center"
+                android:textColor="#E6FFFFFF"
+                android:textSize="16sp"
+                android:shadowColor="#80000000"
+                android:shadowRadius="8" />
+            <TextView
+                android:id="@+id/itemText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:lineSpacingMultiplier ="1.1"
+                android:gravity="start|center"
+                android:textColor="#E6FFFFFF"
+                android:textSize="15sp"
+                android:shadowColor="#80000000"
+                android:shadowRadius="8" />
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start|center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/icon_note"/>
+                <cn.leaqi.drawerapp.Views.MarqueView
+                    android:id="@+id/itemMusicText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="14sp"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="8" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btnBox"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:background="@drawable/radius_icon">
+                    <cn.leaqi.drawerapp.Views.RadiusImage
+                        android:id="@+id/itemIcon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/icon_user"
+                        app:radius="23dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center">
+                    <ImageView
+                        android:id="@+id/iconFollow"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@mipmap/follow_add" />
+                </LinearLayout>
+            </FrameLayout>
+            <cn.leaqi.drawerapp.Views.TouchView style="@style/VideoRightItem" android:id="@+id/itemFav">
+                <ImageView style="@style/VideoRightItemIcon" android:id="@+id/iconFav" android:src="@mipmap/icon_fav" />
+                <TextView style="@style/VideoRightItemText" android:id="@+id/iconFavCount" />
+            </cn.leaqi.drawerapp.Views.TouchView>
+            <cn.leaqi.drawerapp.Views.TouchView style="@style/VideoRightItem" android:id="@+id/itemSay">
+                <ImageView style="@style/VideoRightItemIcon" android:src="@mipmap/icon_say" />
+                <TextView style="@style/VideoRightItemText" android:id="@+id/iconSayCount" />
+            </cn.leaqi.drawerapp.Views.TouchView>
+            <cn.leaqi.drawerapp.Views.TouchView style="@style/VideoRightItem" android:id="@+id/itemShare">
+                <ImageView style="@style/VideoRightItemIcon" android:src="@mipmap/icon_share" />
+                <TextView style="@style/VideoRightItemText" android:id="@+id/iconShareCount" />
+            </cn.leaqi.drawerapp.Views.TouchView>
+            <cn.leaqi.drawerapp.Views.TouchView style="@style/VideoRightItem">
+                <FrameLayout
+                    android:id="@+id/itemMusicIcon"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:background="@mipmap/icon_music">
+                    <cn.leaqi.drawerapp.Views.RadiusImage
+                        android:id="@+id/iconMusic"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:background="#eeeeee"
+                        android:layout_gravity="center"
+                        app:radius="13dp" />
+                </FrameLayout>
+            </cn.leaqi.drawerapp.Views.TouchView>
+        </LinearLayout>
+    </RelativeLayout>
+</cn.leaqi.drawer.SwipeDrawer>

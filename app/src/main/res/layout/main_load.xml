@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/loadBg1"
+        android:src="@mipmap/pull_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="10dp" />
+    <ImageView
+        android:id="@+id/loadBg2"
+        android:src="@mipmap/pull_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="10dp" />
+    <FrameLayout
+        android:id="@+id/loadMain"
+        android:layout_gravity="start|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/loadCar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="start|bottom"
+            android:background="@mipmap/pull_rider" />
+        <ImageView
+            android:id="@+id/loadWheel1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="6dp"
+            android:layout_gravity="start|bottom"
+            android:background="@mipmap/pull_wheel" />
+        <ImageView
+            android:id="@+id/loadWheel2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="38dp"
+            android:layout_gravity="start|bottom"
+            android:background="@mipmap/pull_wheel" />
+    </FrameLayout>
+    <ImageView
+        android:id="@+id/loadSun"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_gravity="center|top"
+        android:background="@mipmap/pull_sun" />
+</FrameLayout>

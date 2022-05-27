@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:background="@color/colorPrimary"
+    android:id="@+id/rootDrawer"
+    app:mode="cover"
+    app:mask="gradual"
+    app:maskClose="true"
+    app:duration="300"
+    app:shrinkRange="10"
+    app:scrollOuterDrag="true"
+    app:mainScroll="@+id/mainScroll"
+    app:bottomScroll="@+id/gridView"
+    app:bottomLayout="@+id/bottomLayout">
+
+    <FrameLayout style="@style/MainMatch" android:id="@+id/bottomLayout" android:paddingTop="30dp">
+        <RelativeLayout style="@style/MainMatch" android:background="@drawable/radius_white_top">
+            <LinearLayout android:id="@+id/topTitle" style="@style/CloseTitle">
+                <TextView style="@style/CloseText" android:text="GridView" />
+                <View style="@style/CloseMid" />
+                <ImageView android:id="@+id/close" style="@style/CloseIcon" />
+            </LinearLayout>
+            <GridView
+                style="@style/MainMatch"
+                android:id="@+id/gridView"
+                android:layout_below="@+id/topTitle"
+                android:clipToPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:verticalSpacing="15dp"
+                android:horizontalSpacing="15dp"
+                android:stretchMode="columnWidth"
+                android:scrollbars="none"
+                android:numColumns="4" />
+        </RelativeLayout>
+    </FrameLayout>
+
+
+    <RelativeLayout style="@style/MainMatch" android:id="@+id/mainLayout">
+
+        <include layout="@layout/top_bar" />
+
+        <ScrollView style="@style/MainMatch" android:id="@+id/mainScroll" android:layout_below="@+id/top_bar" android:background="#ffffff">
+            <LinearLayout style="@style/MainWrap.Vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:padding="20dp"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/MainText"
+                        android:layout_width="wrap_content"
+                        android:textColor="#333333"
+                        android:text="顶部距离：" />
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:thumbOffset="0dp"
+                        android:maxHeight="12dp"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/seek_thumb"
+                        android:progressDrawable="@drawable/seek_layer"
+                        android:max="500" />
+                </LinearLayout>
+
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 1" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 2" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 3" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 4" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 5" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 6" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 7" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#ffffff" android:text="ScrollView Text 8" />
+                <TextView style="@style/MainText" android:layout_height="150dp" android:textColor="#333333" android:background="#eeeeee" android:text="ScrollView Text 9" android:drawableBottom="@mipmap/icon_bottom_black" />
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</cn.leaqi.drawer.SwipeDrawer>

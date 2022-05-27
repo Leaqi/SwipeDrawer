@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <HorizontalScrollView style="@style/ShareScroll">
+        <LinearLayout style="@style/ShareBox" android:id="@+id/shareBox1">
+            <LinearLayout style="@style/ShareItem" android:tag="转发">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_relay" />
+                <TextView style="@style/ShareItemText" android:text="转发" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="私信">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_send" />
+                <TextView style="@style/ShareItemText" android:text="私信" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="朋友圈">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_pyq" />
+                <TextView style="@style/ShareItemText" android:text="朋友圈" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="微信好友">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_wx" />
+                <TextView style="@style/ShareItemText" android:text="微信好友" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="QQ空间">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_qz" />
+                <TextView style="@style/ShareItemText" android:text="QQ空间" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="QQ好友">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_qq" />
+                <TextView style="@style/ShareItemText" android:text="QQ好友" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="微博">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_wb" />
+                <TextView style="@style/ShareItemText" android:text="微博" />
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+    <HorizontalScrollView style="@style/ShareScroll">
+        <LinearLayout style="@style/ShareBox" android:id="@+id/shareBox2">
+            <LinearLayout style="@style/ShareItem" android:tag="保存视频">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_down" />
+                <TextView style="@style/ShareItemText" android:text="保存视频" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="复制链接">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_link" />
+                <TextView style="@style/ShareItemText" android:text="复制链接" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="二维码">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_code" />
+                <TextView style="@style/ShareItemText" android:text="二维码" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="合拍">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_and" />
+                <TextView style="@style/ShareItemText" android:text="合拍" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="不感兴趣">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_no" />
+                <TextView style="@style/ShareItemText" android:text="不感兴趣" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="举报">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_wran" />
+                <TextView style="@style/ShareItemText" android:text="举报" />
+            </LinearLayout>
+            <LinearLayout style="@style/ShareItem" android:tag="反馈">
+                <ImageView style="@style/ShareItemIcon" android:src="@mipmap/share_edit" />
+                <TextView style="@style/ShareItemText" android:text="反馈" />
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

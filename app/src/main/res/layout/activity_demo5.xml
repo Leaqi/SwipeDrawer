@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" style="@style/MainMatch">
+
+    <include layout="@layout/top_bar" />
+
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/mainDrawer"
+        android:layout_below="@+id/top_bar"
+        android:layout_above="@+id/menuView"
+        app:mainOpen="click"
+        app:mainType="scrollX"
+        app:leftLayout="@+id/Left"
+        app:topLayout="@+id/Top"
+        app:rightLayout="@+id/Right"
+        app:bottomLayout="@+id/Bottom">
+
+        <TextView style="@style/MainText" android:layout_width="220dp" android:id="@+id/Left" android:background="#F44336" android:text="ViewPager\n\n外\n\nLeft" android:drawableRight="@mipmap/icon_right" />
+        <TextView style="@style/MainText" android:layout_height="220dp" android:id="@+id/Top" android:background="#E91E63" android:text="ViewPager\n\n外\n\nTop" android:drawableBottom="@mipmap/icon_bottom" />
+        <TextView style="@style/MainText" android:layout_width="220dp" android:id="@+id/Right" android:background="#9C27B0" android:text="ViewPager\n\n外\n\nRight" android:drawableLeft="@mipmap/icon_left" />
+        <TextView style="@style/MainText" android:layout_height="220dp" android:id="@+id/Bottom" android:background="#673AB7" android:text="ViewPager\n\n外\n\nBottom" android:drawableTop="@mipmap/icon_top" />
+
+        <androidx.viewpager.widget.ViewPager style="@style/MainMatch" android:id="@+id/mainView" />
+
+    </cn.leaqi.drawer.SwipeDrawer>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menuView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#eeeeee"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@drawable/menu_color"
+        app:itemTextColor="@drawable/menu_color"
+        app:labelVisibilityMode="labeled" />
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" style="@style/MainMatch">
+
+    <include layout="@layout/top_bar" />
+
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/Drawer1"
+        android:layout_below="@+id/top_bar"
+        app:shrinkRange="10"
+        app:leftLayout="@+id/Left1"
+        app:topLayout="@+id/Top1"
+        app:rightLayout="@+id/Right1"
+        app:bottomLayout="@+id/Bottom1">
+        <TextView style="@style/MainText" android:id="@+id/Left1" android:background="#F44336" android:text="第1层 Left" android:drawableRight="@mipmap/icon_right" />
+        <TextView style="@style/MainText" android:id="@+id/Top1" android:background="#E91E63" android:text="第1层 Top" android:drawableBottom="@mipmap/icon_bottom" />
+        <TextView style="@style/MainText" android:id="@+id/Right1" android:background="#9C27B0" android:text="第1层 Right" android:drawableLeft="@mipmap/icon_left" />
+        <TextView style="@style/MainText" android:id="@+id/Bottom1" android:background="#673AB7" android:text="第1层 Bottom" android:drawableTop="@mipmap/icon_top" />
+        <LinearLayout style="@style/MainMatch" android:background="#3F51B5" android:padding="15dp">
+            <cn.leaqi.drawer.SwipeDrawer
+                style="@style/MainMatch"
+                android:id="@+id/Drawer2"
+                app:parentDrawer="@+id/Drawer1"
+                app:shrinkRange="10"
+                app:leftLayout="@+id/Left2"
+                app:topLayout="@+id/Top2"
+                app:rightLayout="@+id/Right2"
+                app:bottomLayout="@+id/Bottom2">
+                <TextView style="@style/MainText" android:id="@+id/Left2" android:background="#009688" android:text="第2层 Left" android:drawableLeft="@mipmap/icon_left" android:drawableRight="@mipmap/icon_right" />
+                <TextView style="@style/MainText" android:id="@+id/Top2" android:background="#4CAF50" android:text="第2层 Top" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+                <TextView style="@style/MainText" android:id="@+id/Right2" android:background="#8BC34A" android:text="第2层 Right" android:drawableLeft="@mipmap/icon_left" android:drawableRight="@mipmap/icon_right" />
+                <TextView style="@style/MainText" android:id="@+id/Bottom2" android:background="#CDDC39" android:text="第2层 Bottom" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+                <LinearLayout style="@style/MainMatch" android:background="#FF9800" android:padding="15dp">
+                    <cn.leaqi.drawer.SwipeDrawer
+                        style="@style/MainMatch"
+                        android:id="@+id/Drawer3"
+                        app:parentDrawer="@+id/Drawer2"
+                        app:shrinkRange="10"
+                        app:leftLayout="@+id/Left3"
+                        app:topLayout="@+id/Top3"
+                        app:rightLayout="@+id/Right3"
+                        app:bottomLayout="@+id/Bottom3">
+                        <TextView style="@style/MainText" android:id="@+id/Left3" android:background="#166962" android:text="第3层 Left" android:drawableLeft="@mipmap/icon_left" android:drawableRight="@mipmap/icon_right" />
+                        <TextView style="@style/MainText" android:id="@+id/Top3" android:background="#279EB3" android:text="第3层 Top" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+                        <TextView style="@style/MainText" android:id="@+id/Right3" android:background="#00BCD4" android:text="第3层 Right" android:drawableLeft="@mipmap/icon_left" android:drawableRight="@mipmap/icon_right" />
+                        <TextView style="@style/MainText" android:id="@+id/Bottom3" android:background="#11CE8C" android:text="第3层 Bottom" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+                        <TextView style="@style/MainText" android:background="#2196F3" android:text="第3层" android:drawableLeft="@mipmap/icon_left" android:drawableRight="@mipmap/icon_right" android:drawableTop="@mipmap/icon_top" android:drawableBottom="@mipmap/icon_bottom" />
+                    </cn.leaqi.drawer.SwipeDrawer>
+                </LinearLayout>
+            </cn.leaqi.drawer.SwipeDrawer>
+        </LinearLayout>
+    </cn.leaqi.drawer.SwipeDrawer>
+
+</RelativeLayout>

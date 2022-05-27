@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:id="@+id/homeDrawer"
+    android:background="@color/colorBg"
+    app:parentDrawer="@+id/rootDrawer"
+    app:mainOpen="intercept"
+    app:mask="gradual"
+    app:maskClose="true"
+    app:shrinkRange="8"
+    app:bottomLayout="@+id/homeBottom"
+    app:bottomMode="cover"
+    app:bottomDragOpen="false">
+    <LinearLayout
+        android:id="@+id/homeBottom"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/radius_grey_top"
+        android:orientation="vertical">
+        <LinearLayout style="@style/CloseTitle">
+            <TextView style="@style/CloseText" android:text="@string/app_name" />
+            <View style="@style/CloseMid" />
+            <ImageView style="@style/CloseIcon" android:id="@+id/homeClose" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:orientation="horizontal">
+            <LinearLayout style="@style/UserHomeSetItem" android:id="@+id/homeShare">
+                <ImageView style="@style/UserHomeSetItemIcon" android:src="@mipmap/home_share" />
+                <TextView style="@style/UserHomeSetItemText" android:text="分享" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserHomeSetItem" android:id="@+id/homeMsg">
+                <ImageView style="@style/UserHomeSetItemIcon" android:src="@mipmap/home_msg" />
+                <TextView style="@style/UserHomeSetItemText" android:text="聊天" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserHomeSetItem" android:id="@+id/homeWarn">
+                <ImageView style="@style/UserHomeSetItemIcon" android:src="@mipmap/home_warn" />
+                <TextView style="@style/UserHomeSetItemText" android:text="举报" />
+            </LinearLayout>
+            <LinearLayout style="@style/UserHomeSetItem" android:id="@+id/homeBlack">
+                <ImageView style="@style/UserHomeSetItemIcon" android:src="@mipmap/home_black" />
+                <TextView style="@style/UserHomeSetItemText" android:text="拉黑" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <cn.leaqi.drawer.SwipeDrawer
+            android:id="@+id/infoDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:parentDrawer="@+id/homeDrawer"
+            app:mode="fixed"
+            app:mainType="scrollY"
+            app:shrinkRange="0"
+            app:dragDamping="3"
+            app:mainLayout="@+id/homeScroll"
+            app:topLayout="@+id/homeTop">
+            <View
+                android:id="@+id/homeTop"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="#00000000" />
+            <ImageView
+                android:id="@+id/homeBg"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop" />
+            <ScrollView
+                android:id="@+id/homeScroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="true">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/radius_bg_top"
+                                android:layout_marginTop="180dp"
+                                android:paddingTop="60dp"
+                                android:orientation="vertical">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingTop="18dp"
+                                    android:paddingLeft="18dp"
+                                    android:paddingRight="18dp"
+                                    android:paddingBottom="6dp"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:id="@+id/homeName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#E6FFFFFF"
+                                        android:textSize="20sp"
+                                        android:text="@string/app_name" />
+                                    <TextView
+                                        android:id="@+id/homeId"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingTop="5dp"
+                                        android:textColor="#80ffffff"
+                                        android:textSize="12sp" />
+                                    <View android:layout_width="match_parent" android:layout_height="1px" android:background="#80363741" android:layout_marginTop="13dp" android:layout_marginBottom="13dp" />
+                                    <TextView
+                                        android:id="@+id/homeText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:textColor="#E6FFFFFF"
+                                        android:textSize="14sp" />
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+                                        <LinearLayout style="@style/UserHomeInfoTags">
+                                            <ImageView
+                                                android:id="@+id/homeSex"
+                                                android:visibility="gone"
+                                                android:layout_width="16dp"
+                                                android:layout_height="16dp"
+                                                android:layout_marginRight="2dp" />
+                                            <TextView
+                                                android:id="@+id/homeAge"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#80ffffff"
+                                                android:textSize="13sp" />
+                                        </LinearLayout>
+                                        <TextView style="@style/UserHomeInfoTags" android:id="@+id/homeCity" />
+                                    </LinearLayout>
+                                    <FrameLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:animateLayoutChanges="true">
+                                        <LinearLayout
+                                            android:id="@+id/homeFollow"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="42dp"
+                                            android:background="@drawable/radius_follow"
+                                            android:layout_marginTop="15dp"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+                                            <ImageView
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:src="@mipmap/icon_add" />
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#E6FFFFFF"
+                                                android:textSize="18sp"
+                                                android:text="关注" />
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:id="@+id/homeCancel"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="42dp"
+                                            android:background="@drawable/radius_cancel"
+                                            android:layout_marginTop="15dp"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#E6FFFFFF"
+                                                android:textSize="18sp"
+                                                android:text="已关注" />
+                                        </LinearLayout>
+                                    </FrameLayout>
+                                </LinearLayout>
+                                <com.google.android.material.tabs.TabLayout android:id="@+id/homeTab" style="@style/UserHomeTabMain" />
+                                <cn.leaqi.drawerapp.Views.NewGridView
+                                    style="@style/MainWrap"
+                                    android:id="@+id/homeGrid"
+                                    android:paddingTop="1dp"
+                                    android:stretchMode="columnWidth"
+                                    android:verticalSpacing="1dp"
+                                    android:horizontalSpacing="1dp"
+                                    android:scrollbars="none"
+                                    android:numColumns="3" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:layout_marginTop="160dp"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="0dp"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="4dp"
+                                    android:background="@drawable/radius_bg">
+                                    <cn.leaqi.drawerapp.Views.RadiusImage
+                                        android:id="@+id/homeIcon"
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@mipmap/icon_user"
+                                        app:radius="40dp" />
+                                </LinearLayout>
+                                <LinearLayout style="@style/UserHomeInfoItem">
+                                    <TextView style="@style/UserHomeInfoItemName" android:text="获赞" />
+                                    <TextView style="@style/UserHomeInfoItemNum" android:id="@+id/numPraise" />
+                                </LinearLayout>
+                                <View style="@style/UserHomeInfoItemBorder" />
+                                <LinearLayout style="@style/UserHomeInfoItem">
+                                    <TextView style="@style/UserHomeInfoItemName" android:text="关注" />
+                                    <TextView style="@style/UserHomeInfoItemNum" android:id="@+id/numFollow" />
+                                </LinearLayout>
+                                <View style="@style/UserHomeInfoItemBorder" />
+                                <LinearLayout style="@style/UserHomeInfoItem">
+                                    <TextView style="@style/UserHomeInfoItemName" android:text="粉丝" />
+                                    <TextView style="@style/UserHomeInfoItemNum" android:id="@+id/numFans" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </FrameLayout>
+                </FrameLayout>
+            </ScrollView>
+        </cn.leaqi.drawer.SwipeDrawer>
+        <FrameLayout
+            android:id="@+id/userTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+            <ImageView
+                android:id="@+id/homeBack"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="start"
+                android:src="@mipmap/radius_back" />
+            <ImageView
+                android:id="@+id/homeSet"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="end"
+                android:src="@mipmap/radius_set" />
+        </FrameLayout>
+    </FrameLayout>
+</cn.leaqi.drawer.SwipeDrawer>

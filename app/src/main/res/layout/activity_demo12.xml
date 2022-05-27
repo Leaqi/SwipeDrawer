@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" style="@style/MainMatch">
+
+    <include layout="@layout/top_bar" />
+
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/mainDrawer"
+        android:layout_below="@+id/top_bar"
+        android:background="#f9f9f9"
+        app:shrinkRange="1.2"
+        app:dragDamping="4"
+        app:maxDragSize="200dp"
+        app:mainScroll="@+id/mainList"
+        app:topLayout="@+id/topLayout"
+        app:bottomLayout="@+id/bottomLayout">
+        <LinearLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/reTopIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@mipmap/icon_down" />
+            <TextView
+                android:id="@+id/reTopText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+                android:textSize="16sp"
+                android:text="下拉刷新" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/reBottomIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@mipmap/icon_up" />
+            <TextView
+                android:id="@+id/reBottomText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+                android:textSize="16sp"
+                android:text="上拉加载" />
+        </LinearLayout>
+        <RelativeLayout style="@style/MainMatch">
+            <androidx.recyclerview.widget.RecyclerView style="@style/MainMatch.White" android:id="@+id/mainList" android:layout_below="@+id/top_bar" />
+            <TextView
+                style="@style/MainText"
+                android:id="@+id/gesture"
+                android:drawableTop="@mipmap/icon_top_black"
+                android:drawableBottom="@mipmap/icon_bottom_black" />
+        </RelativeLayout>
+    </cn.leaqi.drawer.SwipeDrawer>
+
+</RelativeLayout>

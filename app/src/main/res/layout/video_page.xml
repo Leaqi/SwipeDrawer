@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch"
+    android:id="@+id/loadDrawer"
+    android:layout_below="@+id/top_bar"
+    app:mode="cover"
+    app:duration="360"
+    app:shrinkRange="1"
+    app:dragDamping="4"
+    app:maxDragSize="120dp"
+    app:dragClose="false"
+    app:mainType="scrollY"
+    app:topLayout="@+id/reTopLayout">
+    <LinearLayout
+        android:id="@+id/reTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="bottom|center"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/reTopIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/load_anim" />
+    </LinearLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        style="@style/MainMatch"
+        android:orientation="vertical"
+        android:id="@+id/mainPage" />
+</cn.leaqi.drawer.SwipeDrawer>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" style="@style/MainMatch">
+
+    <include layout="@layout/top_bar" />
+
+    <cn.leaqi.drawer.SwipeDrawer
+        style="@style/MainMatch"
+        android:id="@+id/mainDrawer"
+        android:layout_below="@+id/top_bar"
+        app:mode="cover"
+        app:duration="360"
+        app:shrinkRange="1"
+        app:dragDamping="4"
+        app:maxDragSize="120dp"
+        app:dragClose="false"
+        app:interpolator="@android:anim/anticipate_overshoot_interpolator"
+        app:mainScroll="@+id/mainList"
+        app:topLayout="@+id/topLayout"
+        app:bottomLayout="@+id/bottomLayout">
+        <LinearLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="bottom|center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/reTopIcon"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:alpha="0.9"
+                android:src="@mipmap/cover_load" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="top|center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/reBottomIcon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:alpha="0.9"
+                android:src="@mipmap/cover_more" />
+        </LinearLayout>
+        <RelativeLayout style="@style/MainMatch">
+            <GridView
+                style="@style/MainMatch"
+                android:id="@+id/mainList"
+                android:animateLayoutChanges="true"
+                android:clipToPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:stretchMode="columnWidth"
+                android:scrollbars="none"
+                android:numColumns="2" />
+            <TextView
+                style="@style/MainText"
+                android:id="@+id/gesture"
+                android:drawableTop="@mipmap/icon_top_black"
+                android:drawableBottom="@mipmap/icon_bottom_black" />
+        </RelativeLayout>
+    </cn.leaqi.drawer.SwipeDrawer>
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="TagString" format="string" />
+
+    <declare-styleable name="RadiusImage">
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="VideoPlay">
+        <attr name="playId" format="reference" />
+        <attr name="pauseId" format="reference" />
+        <attr name="seekId" format="reference" />
+        <attr name="loadId" format="reference" />
+    </declare-styleable>
+</resources>
