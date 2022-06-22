@@ -91,6 +91,7 @@
         <attr name="shrinkRange" format="float" />
         <attr name="dragDamping" format="integer" />
         <attr name="dragRange" format="dimension" />
+        <attr name="dragSlop" format="dimension" />
         <attr name="maxDragSize" format="dimension" />
         <attr name="duration" format="integer" />
         <attr name="interpolator" format="reference" />

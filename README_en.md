@@ -22,7 +22,7 @@ Add `SwipeDrawer` dependencies：
 
     dependencies {
         ...
-        implementation 'cn.Leaqi:SwipeDrawer:1.0'
+        implementation 'cn.Leaqi:SwipeDrawer:1.1'
     }
 
 Add `SwipeDrawer` to the layout file ：

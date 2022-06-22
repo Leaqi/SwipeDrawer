@@ -107,6 +107,7 @@ public class SwipeDrawer extends ViewGroup {
     private float shrinkRange = 5;
     private int dragDamping = 10;
     private int dragRange = 0;
+    private int dragSlop = 5;
     private int maxDragSize = 0;
     private int duration = 200;
     private int maskColor = -2147483648;
@@ -178,6 +179,7 @@ public class SwipeDrawer extends ViewGroup {
             float getShrinkRange = attrArr.getFloat(R.styleable.SwipeDrawer_shrinkRange, shrinkRange);
             int getDragDamping = attrArr.getInteger(R.styleable.SwipeDrawer_dragDamping, dragDamping);
             int getDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragRange, dragRange);
+            int getDragSlop = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragSlop, dragSlop);
             int getMaxDragSize = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_maxDragSize, maxDragSize);
             int getDuration = attrArr.getInteger(R.styleable.SwipeDrawer_duration, duration);
             int getMaskColor = attrArr.getColor(R.styleable.SwipeDrawer_maskColor, maskColor);
@@ -217,6 +219,7 @@ public class SwipeDrawer extends ViewGroup {
             setShrinkRange(getShrinkRange);
             setDragDamping(getDragDamping);
             setDragRange(getDragRange);
+            setDragSlop(getDragSlop);
             setMaxDragSize(getMaxDragSize);
             setMaskColor(getMaskColor);
             setDuration(getDuration);
@@ -329,6 +332,11 @@ public class SwipeDrawer extends ViewGroup {
     public void setDragRange(int num) {
         if (num < -1) num = -1;
         dragRange = num;
+    }
+
+    public void setDragSlop(int num) {
+        if (num < 0) num = 0;
+        dragSlop = num;
     }
 
     public void setMaxDragSize(int num) {
@@ -683,6 +691,10 @@ public class SwipeDrawer extends ViewGroup {
 
     public int getDragRange() {
         return dragRange;
+    }
+
+    public int getDragSlop() {
+        return dragSlop;
     }
 
     public int getMaxDragSize() {
@@ -1246,6 +1258,9 @@ public class SwipeDrawer extends ViewGroup {
         int getY = (int) ev.getY();
         int shiftX = getX - downX;
         int shiftY = getY - downY;
+        if (dragSlop > 0 && Math.abs(shiftX) < dragSlop && Math.abs(shiftY) < dragSlop){
+            return false;
+        }
         ViewUtils viewUtils = getIntercept(shiftX, shiftY);
         if (isShow && (mainOpen == MAIN_OPEN_CLICK || mainOpen == MAIN_OPEN_INTERCEPT)) {
             ViewUtils showUtils = getViewUtils(inDirection);
@@ -1416,7 +1431,7 @@ public class SwipeDrawer extends ViewGroup {
             case MotionEvent.ACTION_CANCEL:
                 int getMoveX = Math.abs(getX - downX);
                 int getMoveY = Math.abs(getY - downY);
-                if (!isIntercept && (getMs - downMs) < ViewConfiguration.getLongPressTimeout() && getMoveX < 3 && getMoveY < 3){
+                if (!isIntercept && ((getMoveX == 0 && getMoveY == 0) || (getMs - downMs) < ViewConfiguration.getLongPressTimeout()) && (dragSlop == 0 || (getMoveX < dragSlop && getMoveY < dragSlop))){
                     boolean isClose = false;
                     if (isShow && maskClose && maskView != null) {
                         ViewUtils showUtils = getViewUtils(inDirection);
@@ -1546,7 +1561,8 @@ public class SwipeDrawer extends ViewGroup {
                 } else {
                     int getMoveX = Math.abs(getX - downX);
                     int getMoveY = Math.abs(getY - downY);
-                    if ((getMs - downMs) < ViewConfiguration.getLongPressTimeout() && getMoveX < 3 && getMoveY < 3) performClick();
+                    if (((getMoveX == 0 && getMoveY == 0) || (getMs - downMs) < ViewConfiguration.getLongPressTimeout()) && (dragSlop == 0 || (getMoveX < dragSlop && getMoveY < dragSlop))) performClick();
+                    //return super.onTouchEvent(ev);
                 }
                 break;
         }
