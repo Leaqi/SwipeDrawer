@@ -120,6 +120,7 @@ public class SwipeDrawer extends ViewGroup {
     private boolean maskClose = false;
     private boolean dragClose = true;
     private boolean scrollOuterDrag = false;
+    private boolean autoLayout = true;
     private static boolean allIntercept = false;
     private static SwipeDrawer autoDrawer = null;
 
@@ -134,6 +135,7 @@ public class SwipeDrawer extends ViewGroup {
     private boolean isShow = false;
     private boolean arriveRange = false;
     private boolean isArriveCall = false;
+    private boolean isLayout = false;
     private int parentIntercept = 0;
     private int inDirection = -1;
     private float lastProgress = -1;
@@ -193,6 +195,7 @@ public class SwipeDrawer extends ViewGroup {
             maskClose = attrArr.getBoolean(R.styleable.SwipeDrawer_maskClose, maskClose);
             dragClose = attrArr.getBoolean(R.styleable.SwipeDrawer_dragClose, dragClose);
             scrollOuterDrag = attrArr.getBoolean(R.styleable.SwipeDrawer_scrollOuterDrag, scrollOuterDrag);
+            autoLayout = attrArr.getBoolean(R.styleable.SwipeDrawer_autoLayout, autoLayout);
             parentId = attrArr.getResourceId(R.styleable.SwipeDrawer_parentDrawer, parentId);
             mainScrollId = attrArr.getResourceId(R.styleable.SwipeDrawer_mainScroll, mainScrollId);
             leftScrollId = attrArr.getResourceId(R.styleable.SwipeDrawer_leftScroll, leftScrollId);
@@ -935,6 +938,11 @@ public class SwipeDrawer extends ViewGroup {
         requestLayout();
     }
 
+    public void drawerLayout() {
+        isLayout = true;
+        requestLayout();
+    }
+
     public void updateSize(boolean isAll) {
         if (mainScroll != null) mainScroll.Update(isAll);
         if (leftScroll != null) leftScroll.Update(isAll);
@@ -949,7 +957,6 @@ public class SwipeDrawer extends ViewGroup {
     }
 
     private void setParentIntercept(int intercept, boolean isAll) {
-        //System.out.println("setParentIntercept : " + intercept + " - " + isAll);
         try {
             if (parentDrawer != null) {
                 SwipeDrawer view = parentDrawer;
@@ -1597,11 +1604,23 @@ public class SwipeDrawer extends ViewGroup {
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldW, int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
+        if(isInit && autoLayout) {
+            if(isShow) {
+                closeDrawer(inDirection, false, false);
+                open = inDirection;
+            }
+            isLayout = true;
+        }
+    }
+
+    @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         for (int i = 0; i < getChildCount(); i++) {
             View view = getChildAt(i);
             if (view.getVisibility() != GONE) {
-                if ((view.getLeft() == 0 && view.getTop() == 0 && view.getRight() == 0 && view.getBottom() == 0) || lastMode != mode) {
+                if ((view.getLeft() == 0 && view.getTop() == 0 && view.getRight() == 0 && view.getBottom() == 0) || lastMode != mode || isLayout) {
                     int setLeft = 0;
                     int setTop = 0;
                     int setRight = view.getMeasuredWidth();
@@ -1653,6 +1672,9 @@ public class SwipeDrawer extends ViewGroup {
         if (parentId != -1) {
             setParentDrawer(parentId);
             parentId = -1;
+        }
+        if (changed) {
+            isLayout = false;
         }
     }
 

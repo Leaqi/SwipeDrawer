@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Demo14Activity">
+        <activity android:name=".Demo14Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -29,7 +31,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo13Activity">
+        <activity android:name=".Demo13Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -42,7 +46,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo12Activity">
+        <activity android:name=".Demo12Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -55,7 +61,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo11Activity">
+        <activity android:name=".Demo11Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -70,7 +78,9 @@
         </activity>
         <activity
             android:name=".Demo10Activity"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -83,7 +93,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo9Activity">
+        <activity android:name=".Demo9Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -96,7 +108,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo8Activity">
+        <activity android:name=".Demo8Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -109,7 +123,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo7Activity">
+        <activity android:name=".Demo7Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -122,7 +138,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo6Activity">
+        <activity android:name=".Demo6Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -135,7 +153,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo5Activity">
+        <activity android:name=".Demo5Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -148,7 +168,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo4Activity">
+        <activity android:name=".Demo4Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -161,7 +183,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo3Activity">
+        <activity android:name=".Demo3Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -174,7 +198,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo2Activity">
+        <activity android:name=".Demo2Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -187,7 +213,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo1Activity">
+        <activity android:name=".Demo1Activity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -200,7 +228,9 @@
                     android:scheme="drawer" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

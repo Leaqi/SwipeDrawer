@@ -88,6 +88,7 @@
         <attr name="maskColor" format="color" />
         <attr name="dragClose" format="boolean" />
         <attr name="scrollOuterDrag" format="boolean" />
+        <attr name="autoLayout" format="boolean" />
         <attr name="shrinkRange" format="float" />
         <attr name="dragDamping" format="integer" />
         <attr name="dragRange" format="dimension" />

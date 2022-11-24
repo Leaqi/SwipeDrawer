@@ -2,6 +2,8 @@ package cn.leaqi.drawerapp.Views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
@@ -27,6 +29,7 @@ public class TopBar {
     private TextView topText;
     private View topLeft;
     private View topRight;
+    private View topRotate;
     private View topLeftIcon;
     private View topRightIcon;
     private TextView topRightText;
@@ -44,10 +47,12 @@ public class TopBar {
         topText = mActivity.findViewById(R.id.top_text);
         topLeft = mActivity.findViewById(R.id.top_left);
         topRight = mActivity.findViewById(R.id.top_right);
+        topRotate = mActivity.findViewById(R.id.top_rotate);
         topLeftIcon = mActivity.findViewById(R.id.top_left_icon);
         topRightIcon = mActivity.findViewById(R.id.top_right_icon);
         topRightText = mActivity.findViewById(R.id.top_right_text);
         setStatusBar(true);
+        setRotate();
     }
 
     public TopBar(Context context, boolean isStatus) {
@@ -103,6 +108,19 @@ public class TopBar {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setRotate(){
+        topRotate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mActivity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+                    mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                } else {
+                    mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+            }
+        });
     }
 
     public void setTitle(String title){

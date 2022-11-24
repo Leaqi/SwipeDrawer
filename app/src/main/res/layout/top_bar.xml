@@ -43,6 +43,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:text="@string/app_name"/>
+        <ImageView
+            android:id="@+id/top_rotate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:src="@mipmap/icon_rotate" />
         <TextView
             android:id="@+id/top_right_text"
             android:layout_width="wrap_content"
