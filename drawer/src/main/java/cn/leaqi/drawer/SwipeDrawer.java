@@ -1673,7 +1673,8 @@ public class SwipeDrawer extends ViewGroup {
             setParentDrawer(parentId);
             parentId = -1;
         }
-        if (changed) {
+        if (changed && isLayout) {
+            mainLayout.upMask();
             isLayout = false;
         }
     }
