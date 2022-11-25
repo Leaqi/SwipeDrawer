@@ -1,4 +1,4 @@
-# SwipeDrawer  &middot; [![Star](https://img.shields.io/github/stars/Leaqi/SwipeDrawer?color=fb6698&label=Star "Star")](https://github.com/Leaqi/SwipeDrawer/stargazers "Star") [![Fork](https://img.shields.io/github/forks/Leaqi/SwipeDrawer?color=2196f3&label=Fork "Fork")](https://github.com/Leaqi/SwipeDrawer/network/members "Fork") [![API](https://img.shields.io/badge/API-14%2B-04d8bb "API")](https://github.com/Leaqi/SwipeDrawer/ "API") [![JitPack](https://jitpack.io/v/Leaqi/SwipeDrawer.svg "JitPack")](https://jitpack.io/#cn.Leaqi/SwipeDrawer "JitPack") [![Release](https://img.shields.io/github/v/release/Leaqi/SwipeDrawer?label=Release&color=06da47 "Release")](https://github.com/Leaqi/SwipeDrawer/releases "Release") [![License](https://img.shields.io/badge/License-Apache--2.0-e0b003 "License")](https://github.com/Leaqi/SwipeDrawer/blob/main/LICENSE "License") [![Download Demo Apk](https://img.shields.io/badge/Download-Demo%20Apk-45c703 "Download Demo Apk")](https://github.com/Leaqi/SwipeDrawer/releases/download/1.2/demo.apk "Download Demo Apk")
+# SwipeDrawer  &middot; [![Star](https://img.shields.io/github/stars/Leaqi/SwipeDrawer?color=fb6698&label=Star "Star")](https://github.com/Leaqi/SwipeDrawer/stargazers "Star") [![Fork](https://img.shields.io/github/forks/Leaqi/SwipeDrawer?color=2196f3&label=Fork "Fork")](https://github.com/Leaqi/SwipeDrawer/network/members "Fork") [![API](https://img.shields.io/badge/API-14%2B-04d8bb "API")](https://github.com/Leaqi/SwipeDrawer/ "API") [![JitPack](https://jitpack.io/v/Leaqi/SwipeDrawer.svg "JitPack")](https://jitpack.io/#cn.Leaqi/SwipeDrawer "JitPack") [![Release](https://img.shields.io/github/v/release/Leaqi/SwipeDrawer?label=Release&color=06da47 "Release")](https://github.com/Leaqi/SwipeDrawer/releases "Release") [![License](https://img.shields.io/badge/License-Apache--2.0-e0b003 "License")](https://github.com/Leaqi/SwipeDrawer/blob/main/LICENSE "License") [![Download Demo Apk](https://img.shields.io/badge/Download-Demo%20Apk-45c703 "Download Demo Apk")](https://github.com/Leaqi/SwipeDrawer/releases/download/1.3/demo.apk "Download Demo Apk")
 #### 中文 README | [English README](https://github.com/Leaqi/SwipeDrawer/blob/main/README_en.md "English README")
 Android SwipeDrawer滑动抽屉库，可同时添加上下左右四个方向抽屉布局，抽屉打开模式有抽屉模式、覆盖模式、固定模式三种，支持无限嵌套，支持边缘滑动打开等，SwipeDrawer还可以当做下拉刷新布局使用，支持ListView、RecyclerView、GridView、ScrollView等。
 #### 中文：
@@ -21,7 +21,7 @@ Android SwipeDrawer滑动抽屉库，可同时添加上下左右四个方向抽�
 
     dependencies {
         ...
-        implementation 'cn.Leaqi:SwipeDrawer:1.2'
+        implementation 'cn.Leaqi:SwipeDrawer:1.3'
     }
 
 在布局文件中加入 `SwipeDrawer` ：
