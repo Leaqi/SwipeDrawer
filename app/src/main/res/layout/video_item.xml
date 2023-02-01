@@ -10,6 +10,7 @@
     app:mask="general"
     app:maskColor="#00ffffff"
     app:maskClose="true"
+    app:dragCloseType="drawer"
     app:scrollOuterDrag="true"
     app:shrinkRange="10"
     app:dragRange="-1px"

@@ -22,7 +22,7 @@ import android.view.View;
  * Created by Leaqi.
  * Github: https://github.com/Leaqi
  */
-public class ViewUtils {
+class ViewUtils {
     View view = null;
     View mask = null;
     int type = -1;
@@ -32,10 +32,6 @@ public class ViewUtils {
     int top = 0;
     int right = 0;
     int bottom = 0;
-    int paddingLeft = 0;
-    int paddingTop = 0;
-    int paddingRight = 0;
-    int paddingBottom = 0;
     boolean intercept = true;
 
     ViewUtils(View v, int t) {
@@ -57,10 +53,6 @@ public class ViewUtils {
             top = view.getTop();
             right = view.getRight();
             bottom = view.getBottom();
-            paddingLeft = view.getPaddingLeft();
-            paddingTop = view.getPaddingTop();
-            paddingRight = view.getPaddingRight();
-            paddingBottom = view.getPaddingBottom();
         }
     }
 

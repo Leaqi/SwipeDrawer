@@ -56,6 +56,10 @@ public class SwipeDrawer extends ViewGroup {
     public static final int MAIN_OPEN_CLICK = 1;
     public static final int MAIN_OPEN_INTERCEPT = 2;
 
+    public static final int CLOSE_TYPE_ALL = 0;
+    public static final int CLOSE_TYPE_MAIN = 1;
+    public static final int CLOSE_TYPE_DRAWER = 2;
+
     public static final int STATE_START = 0;
     public static final int STATE_OPEN = 1;
     public static final int STATE_CLOSE = 2;
@@ -66,6 +70,8 @@ public class SwipeDrawer extends ViewGroup {
     public static final int STATE_CANCEL = 7;
     public static final int STATE_DRAG_INTO = 8;
     public static final int STATE_DRAG_OUT = 9;
+
+    private static final int INVALID_POINTER = -1;
 
     private int open = 0;
     private int mask = 0;
@@ -109,6 +115,7 @@ public class SwipeDrawer extends ViewGroup {
     private int dragRange = 0;
     private int dragSlop = 5;
     private int maxDragSize = 0;
+    private int dragCloseType = 0;
     private int duration = 200;
     private int maskColor = -2147483648;
     private boolean leftDragOpen = true;
@@ -127,6 +134,11 @@ public class SwipeDrawer extends ViewGroup {
     private int downX = 0;
     private int downY = 0;
     private int downMs = 0;
+    private int getPointerId = INVALID_POINTER;
+    private int getLastMoveX = 0;
+    private int getLastMoveY = 0;
+    private int getLastShiftX = 0;
+    private int getLastShiftY = 0;
 
     private boolean isInit = false;
     private boolean isFinish = false;
@@ -166,26 +178,27 @@ public class SwipeDrawer extends ViewGroup {
         if (attr != null) {
             final TypedArray attrArr = context.obtainStyledAttributes(attr, R.styleable.SwipeDrawer);
             open = attrArr.getInteger(R.styleable.SwipeDrawer_open, open);
-            int getMode = attrArr.getInteger(R.styleable.SwipeDrawer_mode, mode);
-            int getMask = attrArr.getInteger(R.styleable.SwipeDrawer_mask, mask);
-            int getLeftMode = attrArr.getInteger(R.styleable.SwipeDrawer_leftMode, leftMode);
-            int getTopMode = attrArr.getInteger(R.styleable.SwipeDrawer_topMode, topMode);
-            int getRightMode = attrArr.getInteger(R.styleable.SwipeDrawer_rightMode, rightMode);
-            int getBottomMode = attrArr.getInteger(R.styleable.SwipeDrawer_bottomMode, bottomMode);
-            int getMainType = attrArr.getInteger(R.styleable.SwipeDrawer_mainType, mainType);
-            int getLeftType = attrArr.getInteger(R.styleable.SwipeDrawer_leftType, leftType);
-            int getTopType = attrArr.getInteger(R.styleable.SwipeDrawer_topType, topType);
-            int getRightType = attrArr.getInteger(R.styleable.SwipeDrawer_rightType, rightType);
-            int getBottomType = attrArr.getInteger(R.styleable.SwipeDrawer_bottomType, bottomType);
-            int getMainOpen = attrArr.getInteger(R.styleable.SwipeDrawer_mainOpen, mainOpen);
-            float getShrinkRange = attrArr.getFloat(R.styleable.SwipeDrawer_shrinkRange, shrinkRange);
-            int getDragDamping = attrArr.getInteger(R.styleable.SwipeDrawer_dragDamping, dragDamping);
-            int getDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragRange, dragRange);
-            int getDragSlop = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragSlop, dragSlop);
-            int getMaxDragSize = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_maxDragSize, maxDragSize);
-            int getDuration = attrArr.getInteger(R.styleable.SwipeDrawer_duration, duration);
-            int getMaskColor = attrArr.getColor(R.styleable.SwipeDrawer_maskColor, maskColor);
-            int getInterpolatorId = attrArr.getResourceId(R.styleable.SwipeDrawer_interpolator, -1);
+            final int getMode = attrArr.getInteger(R.styleable.SwipeDrawer_mode, mode);
+            final int getMask = attrArr.getInteger(R.styleable.SwipeDrawer_mask, mask);
+            final int getLeftMode = attrArr.getInteger(R.styleable.SwipeDrawer_leftMode, leftMode);
+            final int getTopMode = attrArr.getInteger(R.styleable.SwipeDrawer_topMode, topMode);
+            final int getRightMode = attrArr.getInteger(R.styleable.SwipeDrawer_rightMode, rightMode);
+            final int getBottomMode = attrArr.getInteger(R.styleable.SwipeDrawer_bottomMode, bottomMode);
+            final int getMainType = attrArr.getInteger(R.styleable.SwipeDrawer_mainType, mainType);
+            final int getLeftType = attrArr.getInteger(R.styleable.SwipeDrawer_leftType, leftType);
+            final int getTopType = attrArr.getInteger(R.styleable.SwipeDrawer_topType, topType);
+            final int getRightType = attrArr.getInteger(R.styleable.SwipeDrawer_rightType, rightType);
+            final int getBottomType = attrArr.getInteger(R.styleable.SwipeDrawer_bottomType, bottomType);
+            final int getMainOpen = attrArr.getInteger(R.styleable.SwipeDrawer_mainOpen, mainOpen);
+            final float getShrinkRange = attrArr.getFloat(R.styleable.SwipeDrawer_shrinkRange, shrinkRange);
+            final int getDragDamping = attrArr.getInteger(R.styleable.SwipeDrawer_dragDamping, dragDamping);
+            final int getDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragRange, dragRange);
+            final int getDragSlop = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragSlop, dragSlop);
+            final int getDragCloseType = attrArr.getInteger(R.styleable.SwipeDrawer_dragCloseType, dragCloseType);
+            final int getMaxDragSize = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_maxDragSize, maxDragSize);
+            final int getDuration = attrArr.getInteger(R.styleable.SwipeDrawer_duration, duration);
+            final int getMaskColor = attrArr.getColor(R.styleable.SwipeDrawer_maskColor, maskColor);
+            final int getInterpolatorId = attrArr.getResourceId(R.styleable.SwipeDrawer_interpolator, -1);
             leftDragOpen = attrArr.getBoolean(R.styleable.SwipeDrawer_leftDragOpen, leftDragOpen);
             topDragOpen = attrArr.getBoolean(R.styleable.SwipeDrawer_topDragOpen, topDragOpen);
             rightDragOpen = attrArr.getBoolean(R.styleable.SwipeDrawer_rightDragOpen, rightDragOpen);
@@ -212,6 +225,7 @@ public class SwipeDrawer extends ViewGroup {
             if (getTopMode == MODE_DRAWER || getTopMode == MODE_COVER || getTopMode == MODE_FIXED) topMode = getTopMode;
             if (getRightMode == MODE_DRAWER || getRightMode == MODE_COVER || getRightMode == MODE_FIXED) rightMode = getRightMode;
             if (getBottomMode == MODE_DRAWER || getBottomMode == MODE_COVER || getBottomMode == MODE_FIXED) bottomMode = getBottomMode;
+            if (getDragCloseType == CLOSE_TYPE_ALL || getDragCloseType == CLOSE_TYPE_MAIN || getDragCloseType == CLOSE_TYPE_DRAWER) dragCloseType = getDragCloseType;
             setMask(getMask);
             setMainType(getMainType);
             setLeftType(getLeftType);
@@ -391,8 +405,18 @@ public class SwipeDrawer extends ViewGroup {
         dragClose = bool;
     }
 
+    public void setDragCloseType(int type) {
+        if (type == CLOSE_TYPE_ALL || type == CLOSE_TYPE_MAIN || type == CLOSE_TYPE_DRAWER) {
+            dragCloseType = type;
+        }
+    }
+
     public void setScrollOuterDrag(boolean bool) {
         scrollOuterDrag = bool;
+    }
+
+    public void setAutoLayout(boolean bool) {
+        autoLayout = bool;
     }
 
     public void setParentDrawer(final int id) {
@@ -558,12 +582,12 @@ public class SwipeDrawer extends ViewGroup {
     }
 
     public boolean setIntercept(View view, boolean intercept) {
-        int type = getDirection(view);
+        final int type = getDirection(view);
         return setIntercept(type, intercept);
     }
 
     public boolean setIntercept(int type, boolean intercept) {
-        ViewUtils utils = getViewUtils(type);
+        final ViewUtils utils = getViewUtils(type);
         if (utils != null) {
             utils.intercept = intercept;
         }
@@ -736,8 +760,16 @@ public class SwipeDrawer extends ViewGroup {
         return maskClose;
     }
 
+    public int getDragCloseType() {
+        return dragCloseType;
+    }
+
     public boolean getScrollOuterDrag() {
         return scrollOuterDrag;
+    }
+
+    public boolean getAutoLayout() {
+        return autoLayout;
     }
 
     public boolean getIntercept() {
@@ -793,36 +825,6 @@ public class SwipeDrawer extends ViewGroup {
         return mode;
     }
 
-    public ViewUtils getViewUtils(int type) {
-        if (type == DIRECTION_MAIN && mainLayout != null) {
-            return mainLayout;
-        } else if (type == DIRECTION_LEFT && leftLayout != null) {
-            return leftLayout;
-        } else if (type == DIRECTION_TOP && topLayout != null) {
-            return topLayout;
-        } else if (type == DIRECTION_RIGHT && rightLayout != null) {
-            return rightLayout;
-        } else if (type == DIRECTION_BOTTOM && bottomLayout != null) {
-            return bottomLayout;
-        }
-        return null;
-    }
-
-    public ViewUtils getScrollUtils(int type) {
-        if (type == DIRECTION_MAIN && mainScroll != null) {
-            return mainScroll;
-        } else if (type == DIRECTION_LEFT && leftScroll != null) {
-            return leftScroll;
-        } else if (type == DIRECTION_TOP && topScroll != null) {
-            return topScroll;
-        } else if (type == DIRECTION_RIGHT && rightScroll != null) {
-            return rightScroll;
-        } else if (type == DIRECTION_BOTTOM && bottomScroll != null) {
-            return bottomScroll;
-        }
-        return null;
-    }
-
     public void openDrawer(int type) {
         openDrawer(type, true, true);
     }
@@ -833,7 +835,7 @@ public class SwipeDrawer extends ViewGroup {
 
     public void openDrawer(int type, boolean anim, boolean call) {
         if (isShow || AnimThread.isThread(animThread)) return;
-        ViewUtils viewUtils = getViewUtils(type);
+        final ViewUtils viewUtils = getViewUtils(type);
         if (viewUtils != null) {
             if (!isInit) {
                 open = type;
@@ -882,7 +884,7 @@ public class SwipeDrawer extends ViewGroup {
 
     public void closeDrawer(int type, boolean anim, boolean call) {
         if (!isShow || type != inDirection || AnimThread.isThread(animThread)) return;
-        ViewUtils viewUtils = getViewUtils(type);
+        final ViewUtils viewUtils = getViewUtils(type);
         if (viewUtils != null) {
             inDirection = type;
             isShow = false;
@@ -992,7 +994,7 @@ public class SwipeDrawer extends ViewGroup {
 
     private void requestIntercept() {
         try {
-            ViewParent parent = getParent();
+            final ViewParent parent = getParent();
             if (parent != null) {
                 parent.requestDisallowInterceptTouchEvent(true);
             }
@@ -1007,58 +1009,103 @@ public class SwipeDrawer extends ViewGroup {
         return location;
     }
 
+    private ViewUtils getViewUtils(int type) {
+        if (type == DIRECTION_MAIN && mainLayout != null) {
+            return mainLayout;
+        } else if (type == DIRECTION_LEFT && leftLayout != null) {
+            return leftLayout;
+        } else if (type == DIRECTION_TOP && topLayout != null) {
+            return topLayout;
+        } else if (type == DIRECTION_RIGHT && rightLayout != null) {
+            return rightLayout;
+        } else if (type == DIRECTION_BOTTOM && bottomLayout != null) {
+            return bottomLayout;
+        }
+        return null;
+    }
+
+    private ViewUtils getScrollUtils(int type) {
+        if (type == DIRECTION_MAIN && mainScroll != null) {
+            return mainScroll;
+        } else if (type == DIRECTION_LEFT && leftScroll != null) {
+            return leftScroll;
+        } else if (type == DIRECTION_TOP && topScroll != null) {
+            return topScroll;
+        } else if (type == DIRECTION_RIGHT && rightScroll != null) {
+            return rightScroll;
+        } else if (type == DIRECTION_BOTTOM && bottomScroll != null) {
+            return bottomScroll;
+        }
+        return null;
+    }
+
     private boolean isScrollType(int type) {
+        final int getMode = getDirectionMode(type);
+        final boolean isDrawer = getMode == MODE_DRAWER;
+        final boolean isFixed = getMode == MODE_FIXED;
+        final boolean isCover = getMode == MODE_COVER;
         final boolean isLeft = type == DIRECTION_LEFT;
         final boolean isTop = type == DIRECTION_TOP;
         final boolean isRight = type == DIRECTION_RIGHT;
         final boolean isBottom = type == DIRECTION_BOTTOM;
+        final ViewUtils mainUtils = getViewUtils(DIRECTION_MAIN);
+        final ViewUtils drawerUtils = getViewUtils(type);
         boolean bool = true;
         ViewUtils viewUtils;
-        if (isShow) {
-            viewUtils = getScrollUtils(type);
-            if (viewUtils != null) {
-                if (isTop && !viewUtils.isScrollBottom()) bool = false;
-                if (isBottom && !viewUtils.isScrollTop()) bool = false;
-                if (isLeft && !viewUtils.isScrollRight()) bool = false;
-                if (isRight && !viewUtils.isScrollLeft()) bool = false;
-            } else {
-                int setType = 0;
-                if (isTop) setType = topType;
-                if (isBottom) setType = bottomType;
-                if (isLeft) setType = leftType;
-                if (isRight) setType = rightType;
-                viewUtils = getViewUtils(type);
-                if (viewUtils != null) {
-                    if (setType == TYPE_SCROLL_Y) {
+        if (mainUtils != null && drawerUtils != null) {
+            if (isShow) {
+                if (dragCloseType == CLOSE_TYPE_MAIN) {
+                    if (isDrawer || isFixed) {
+                        bool = mainUtils.isActionDown(downX, downY, getLocation());
+                    } else if (isCover) {
+                        bool = !drawerUtils.isActionDown(downX, downY, getLocation());
+                    }
+                } else if (dragCloseType == CLOSE_TYPE_DRAWER) {
+                    bool = drawerUtils.isActionDown(downX, downY, getLocation());
+                }
+                if (bool) {
+                    viewUtils = getScrollUtils(type);
+                    if (viewUtils != null) {
                         if (isTop && !viewUtils.isScrollBottom()) bool = false;
                         if (isBottom && !viewUtils.isScrollTop()) bool = false;
-                    } else if (setType == TYPE_SCROLL_X) {
                         if (isLeft && !viewUtils.isScrollRight()) bool = false;
                         if (isRight && !viewUtils.isScrollLeft()) bool = false;
+                        if (scrollOuterDrag) {
+                            if (!viewUtils.isActionDown(downX, downY, getLocation())) {
+                                bool = true;
+                            }
+                        }
+                    } else {
+                        int setType = 0;
+                        if (isTop) setType = topType;
+                        if (isBottom) setType = bottomType;
+                        if (isLeft) setType = leftType;
+                        if (isRight) setType = rightType;
+                        if (setType == TYPE_SCROLL_Y) {
+                            if (isTop && !drawerUtils.isScrollBottom()) bool = false;
+                            if (isBottom && !drawerUtils.isScrollTop()) bool = false;
+                        } else if (setType == TYPE_SCROLL_X) {
+                            if (isLeft && !drawerUtils.isScrollRight()) bool = false;
+                            if (isRight && !drawerUtils.isScrollLeft()) bool = false;
+                        }
                     }
                 }
-            }
-        } else {
-            viewUtils = getScrollUtils(DIRECTION_MAIN);
-            if (viewUtils != null) {
-                if (isTop && !viewUtils.isScrollTop()) bool = false;
-                if (isBottom && !viewUtils.isScrollBottom()) bool = false;
-                if (isLeft && !viewUtils.isScrollLeft()) bool = false;
-                if (isRight && !viewUtils.isScrollRight()) bool = false;
             } else {
-                viewUtils = getViewUtils(DIRECTION_MAIN);
-                if (mainType == TYPE_SCROLL_Y) {
+                viewUtils = getScrollUtils(DIRECTION_MAIN);
+                if (viewUtils != null) {
                     if (isTop && !viewUtils.isScrollTop()) bool = false;
                     if (isBottom && !viewUtils.isScrollBottom()) bool = false;
-                } else if (mainType == TYPE_SCROLL_X) {
                     if (isLeft && !viewUtils.isScrollLeft()) bool = false;
                     if (isRight && !viewUtils.isScrollRight()) bool = false;
+                } else {
+                    if (mainType == TYPE_SCROLL_Y) {
+                        if (isTop && !mainUtils.isScrollTop()) bool = false;
+                        if (isBottom && !mainUtils.isScrollBottom()) bool = false;
+                    } else if (mainType == TYPE_SCROLL_X) {
+                        if (isLeft && !mainUtils.isScrollLeft()) bool = false;
+                        if (isRight && !mainUtils.isScrollRight()) bool = false;
+                    }
                 }
-            }
-        }
-        if (viewUtils != null && scrollOuterDrag) {
-            if (!viewUtils.isActionDown(downX, downY, getLocation())) {
-                bool = true;
             }
         }
         return bool;
@@ -1093,7 +1140,7 @@ public class SwipeDrawer extends ViewGroup {
         if (!isTouch) return;
         final ViewUtils viewUtils = getViewUtils(inDirection);
         if (viewUtils == null) return;
-        int getMode = getDirectionMode(inDirection);
+        final int getMode = getDirectionMode(inDirection);
         final boolean isDrawer = getMode == MODE_DRAWER;
         final boolean isFixed = getMode == MODE_FIXED;
         final boolean isCover = getMode == MODE_COVER;
@@ -1261,16 +1308,16 @@ public class SwipeDrawer extends ViewGroup {
             setParentIntercept(0, false);
             return false;
         }
-        int getX = (int) ev.getX();
-        int getY = (int) ev.getY();
-        int shiftX = getX - downX;
-        int shiftY = getY - downY;
+        final int getX = (int) ev.getX();
+        final int getY = (int) ev.getY();
+        final int shiftX = getX - downX;
+        final int shiftY = getY - downY;
         if (dragSlop > 0 && Math.abs(shiftX) < dragSlop && Math.abs(shiftY) < dragSlop){
             return false;
         }
-        ViewUtils viewUtils = getIntercept(shiftX, shiftY);
+        final ViewUtils viewUtils = getIntercept(shiftX, shiftY);
         if (isShow && (mainOpen == MAIN_OPEN_CLICK || mainOpen == MAIN_OPEN_INTERCEPT)) {
-            ViewUtils showUtils = getViewUtils(inDirection);
+            final ViewUtils showUtils = getViewUtils(inDirection);
             if (showUtils != null && viewUtils == null) {
                 if (maskView != null) {
                     requestIntercept();
@@ -1404,14 +1451,15 @@ public class SwipeDrawer extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (!isTouch || (!dragClose && isShow) || (parentIntercept == 1 && !isShow) || parentIntercept == 2 || allIntercept) return super.onInterceptTouchEvent(ev);
-        int getX = (int) ev.getX();
-        int getY = (int) ev.getY();
-        int getMs = (int) ev.getEventTime();
+        final int getX = (int) ev.getX();
+        final int getY = (int) ev.getY();
+        final int getMs = (int) ev.getEventTime();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downX = getX;
                 downY = getY;
                 downMs = getMs;
+                getPointerId = ev.getPointerId(0);
                 cacheDrawer(true);
                 setParentIntercept(1, true);
                 if (isShow && mainOpen == MAIN_OPEN_INTERCEPT) {
@@ -1419,7 +1467,7 @@ public class SwipeDrawer extends ViewGroup {
                         requestIntercept();
                         setParentIntercept(2, true);
                     } else {
-                        ViewUtils showUtils = getViewUtils(inDirection);
+                        final ViewUtils showUtils = getViewUtils(inDirection);
                         if (showUtils != null) {
                             if (!showUtils.isActionDown(downX, downY, getLocation())) {
                                 return true;
@@ -1436,12 +1484,12 @@ public class SwipeDrawer extends ViewGroup {
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                int getMoveX = Math.abs(getX - downX);
-                int getMoveY = Math.abs(getY - downY);
+                final int getMoveX = Math.abs(getX - downX);
+                final int getMoveY = Math.abs(getY - downY);
                 if (!isIntercept && ((getMoveX == 0 && getMoveY == 0) || (getMs - downMs) < ViewConfiguration.getLongPressTimeout()) && (dragSlop == 0 || (getMoveX < dragSlop && getMoveY < dragSlop))){
                     boolean isClose = false;
                     if (isShow && maskClose && maskView != null) {
-                        ViewUtils showUtils = getViewUtils(inDirection);
+                        final ViewUtils showUtils = getViewUtils(inDirection);
                         if (showUtils != null) {
                             if (!showUtils.isActionDown(downX, downY, getLocation())) {
                                 closeDrawer();
@@ -1454,6 +1502,9 @@ public class SwipeDrawer extends ViewGroup {
                     }
                 }
                 isIntercept = false;
+                getPointerId = INVALID_POINTER;
+                getLastMoveX = 0;
+                getLastMoveY = 0;
                 setParentIntercept(0, true);
                 break;
         }
@@ -1463,35 +1514,45 @@ public class SwipeDrawer extends ViewGroup {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (!isTouch || (!dragClose && isShow) || (parentIntercept == 1 && !isShow) || parentIntercept == 2 || allIntercept) return super.onTouchEvent(ev);
-        int getX = (int) ev.getX();
-        int getY = (int) ev.getY();
-        int getMs = (int) ev.getEventTime();
-        int getMode = getDirectionMode(inDirection);
-        boolean isDrawer = getMode == MODE_DRAWER;
-        boolean isFixed = getMode == MODE_FIXED;
-        boolean isCover = getMode == MODE_COVER;
-        boolean isLeft = inDirection == DIRECTION_LEFT;
-        boolean isTop = inDirection == DIRECTION_TOP;
-        boolean isRight = inDirection == DIRECTION_RIGHT;
-        boolean isBottom = inDirection == DIRECTION_BOTTOM;
-        switch (ev.getAction()) {
+        final int getX = (int) ev.getX();
+        final int getY = (int) ev.getY();
+        final int getMs = (int) ev.getEventTime();
+        final int getMode = getDirectionMode(inDirection);
+        final boolean isDrawer = getMode == MODE_DRAWER;
+        final boolean isFixed = getMode == MODE_FIXED;
+        final boolean isCover = getMode == MODE_COVER;
+        final boolean isLeft = inDirection == DIRECTION_LEFT;
+        final boolean isTop = inDirection == DIRECTION_TOP;
+        final boolean isRight = inDirection == DIRECTION_RIGHT;
+        final boolean isBottom = inDirection == DIRECTION_BOTTOM;
+        final int getIndex = ev.getActionIndex();
+        switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
                 if (checkIntercept(ev)) {
                     requestIntercept();
                     return true;
                 }
                 if (isIntercept) {
-                    int shiftX = getX - downX;
-                    int shiftY = getY - downY;
-                    ViewUtils viewUtils = getViewUtils(inDirection);
+                    final int activePointerIndex = ev.findPointerIndex(getPointerId);
+                    if (activePointerIndex == -1) break;
+                    final ViewUtils viewUtils = getViewUtils(inDirection);
                     if (viewUtils != null) {
-                        int moveSize = isLeft || isRight ? shiftX : shiftY;
-                        int viewSize = isLeft || isRight ? viewUtils.width : viewUtils.height;
-                        int mainSize = isLeft || isRight ? mainLayout.width : mainLayout.height;
-                        int newSize = maxDragSize > 0 && !isShow ? maxDragSize : viewSize;
-                        if (dragDamping > 0 && dragDamping < 10) moveSize *= (float)dragDamping / 10;
+                        final int moveX = (int) ev.getX(activePointerIndex);
+                        final int moveY = (int) ev.getY(activePointerIndex);
+                        final int viewSize = isLeft || isRight ? viewUtils.width : viewUtils.height;
+                        final int mainSize = isLeft || isRight ? mainLayout.width : mainLayout.height;
+                        final int newSize = maxDragSize > 0 && !isShow ? maxDragSize : viewSize;
+                        final float getDamping = dragDamping > 0 && dragDamping < 10 ? (float)dragDamping / 10 : 1;
+                        getLastShiftX = moveX - downX + getLastMoveX;
+                        getLastShiftY = moveY - downY + getLastMoveY;
+                        int moveSize = isLeft || isRight ? getLastShiftX : getLastShiftY;
+                        moveSize *= getDamping;
                         if ((((isLeft || isTop) && ((isShow && moveSize > 0) || (!isShow && moveSize < 0)))) || (((isRight || isBottom) && ((isShow && moveSize < 0) || (!isShow && moveSize > 0))))) moveSize = 0;
-                        if (Math.abs(moveSize) > newSize) moveSize = (isShow && (isLeft || isTop)) || (!isShow && (isRight || isBottom)) ? -newSize : newSize;
+                        if (Math.abs(moveSize) >= newSize) {
+                            moveSize = (isShow && (isLeft || isTop)) || (!isShow && (isRight || isBottom)) ? -newSize : newSize;
+                            downX += getLastShiftX - moveSize / getDamping;
+                            downY += getLastShiftY - moveSize / getDamping;
+                        }
                         if (isShow) {
                             if (isLeft || isRight) {
                                 if (isDrawer || isFixed) mainLayout.setRight(moveSize + mainSize + (isLeft ? viewSize : -viewSize));
@@ -1510,7 +1571,7 @@ public class SwipeDrawer extends ViewGroup {
                             }
                         }
                         checkRange(viewUtils, isCover, isLeft, isRight, isTop, isBottom);
-                        float progress = (float) Math.abs(moveSize) / (isLeft || isRight ? viewUtils.width : viewUtils.height);
+                        final float progress = (float) Math.abs(moveSize) / (isLeft || isRight ? viewUtils.width : viewUtils.height);
                         if (lastProgress != progress) {
                             if (onDrawerState != null) onDrawerState.onMove(inDirection, isShow ? (1 - progress) : progress);
                             if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_PROGRESS, isShow ? (1 - progress) : progress);
@@ -1539,7 +1600,7 @@ public class SwipeDrawer extends ViewGroup {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 if (isIntercept) {
-                    ViewUtils viewUtils = getViewUtils(inDirection);
+                    final ViewUtils viewUtils = getViewUtils(inDirection);
                     if (viewUtils != null) {
                         checkRange(viewUtils, isCover, isLeft, isRight, isTop, isBottom);
                         if (shrinkRange == 0) {
@@ -1564,12 +1625,32 @@ public class SwipeDrawer extends ViewGroup {
                         }
                     }
                     isIntercept = false;
+                    getPointerId = INVALID_POINTER;
+                    getLastMoveX = 0;
+                    getLastMoveY = 0;
                     setParentIntercept(0, true);
                 } else {
-                    int getMoveX = Math.abs(getX - downX);
-                    int getMoveY = Math.abs(getY - downY);
+                    final int getMoveX = Math.abs(getX - downX);
+                    final int getMoveY = Math.abs(getY - downY);
                     if (((getMoveX == 0 && getMoveY == 0) || (getMs - downMs) < ViewConfiguration.getLongPressTimeout()) && (dragSlop == 0 || (getMoveX < dragSlop && getMoveY < dragSlop))) performClick();
-                    //return super.onTouchEvent(ev);
+                }
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                downX = (int) ev.getX(getIndex);
+                downY = (int) ev.getY(getIndex);
+                getPointerId = ev.getPointerId(getIndex);
+                getLastMoveX = getLastShiftX;
+                getLastMoveY = getLastShiftY;
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                final int pointerId = ev.getPointerId(getIndex);
+                if (pointerId == getPointerId) {
+                    final int newPointerIndex = getIndex == 0 ? 1 : 0;
+                    downX = (int) ev.getX(newPointerIndex);
+                    downY = (int) ev.getY(newPointerIndex);
+                    getPointerId = ev.getPointerId(newPointerIndex);
+                    getLastMoveX = getLastShiftX;
+                    getLastMoveY = getLastShiftY;
                 }
                 break;
         }

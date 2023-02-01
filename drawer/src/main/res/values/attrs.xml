@@ -67,6 +67,11 @@
             <enum name="click" value="1" />
             <enum name="intercept" value="2" />
         </attr>
+        <attr name="dragCloseType" format="enum">
+            <enum name="all" value="0" />
+            <enum name="main" value="1" />
+            <enum name="drawer" value="2" />
+        </attr>
         <attr name="parentDrawer" format="reference" />
         <attr name="mainScroll" format="reference" />
         <attr name="leftScroll" format="reference" />

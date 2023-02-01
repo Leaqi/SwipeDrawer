@@ -9,6 +9,7 @@
     app:mainOpen="intercept"
     app:mask="gradual"
     app:maskClose="true"
+    app:dragCloseType="drawer"
     app:shrinkRange="8"
     app:bottomLayout="@+id/homeBottom"
     app:bottomMode="cover"
