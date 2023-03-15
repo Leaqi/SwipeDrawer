@@ -164,6 +164,8 @@ public class MainActivity extends Activity {
             add(new BtnBean("RecyclerView 下拉刷新", "Demo12", "#AE4DD1"));
             add(new BtnBean("GridView 下拉刷新", "Demo13", "#447CCF"));
             add(new BtnBean("ScrollView 下拉刷新", "Demo14", "#20B1AC"));
+            add(new BtnBean("地图位置抽屉", "Demo15", "#5f2abd"));
+            add(new BtnBean("桌面抽屉", "Demo16", "#4b9d22"));
         }};
         final ListAdapter listAdapter = new ListAdapter(this, R.layout.list_btn, listData);
         mainList.setAdapter(listAdapter);

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch.Vertical"
+    android:id="@+id/rootDrawer"
+    app:mode="cover"
+    app:mask="gradual"
+    app:maskClose="true"
+    app:maskColor="#80FFFFFF"
+    app:shrinkRange="8"
+    app:showLayout="true"
+    app:scrollOuterDrag="true"
+    app:leftOffset="10dp"
+    app:leftDragRange="15dp"
+    app:leftLayout="@+id/leftLayout"
+    app:bottomOffset="90dp"
+    app:bottomDragRange="90dp"
+    app:bottomScroll="@+id/mainScroll"
+    app:bottomLayout="@+id/bottomLayout">
+    <LinearLayout android:layout_width="120dp" android:layout_height="match_parent" android:paddingLeft="10dp" android:orientation="horizontal" android:gravity="start|center" android:id="@+id/leftLayout">
+        <ImageView
+            android:id="@+id/leftBar"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@mipmap/icon_left_bar" />
+        <ScrollView
+            android:id="@+id/barScroll"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:background="@drawable/radius_left_bar">
+            <LinearLayout style="@style/DeskListBox.Bar" android:orientation="vertical" android:gravity="center">
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="QQ">
+                    <ImageView style="@style/DeskListItemIcon.Bar" android:src="@mipmap/share_qq" />
+                    <TextView style="@style/DeskListItemText.Bar" android:text="QQ"/>
+                </LinearLayout>
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="微信">
+                    <ImageView style="@style/DeskListItemIcon.Bar" android:src="@mipmap/share_wx" />
+                    <TextView style="@style/DeskListItemText.Bar" android:text="微信"/>
+                </LinearLayout>
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="QQ空间">
+                    <ImageView style="@style/DeskListItemIcon.Bar" android:src="@mipmap/share_qz" />
+                    <TextView style="@style/DeskListItemText.Bar" android:text="QQ空间"/>
+                </LinearLayout>
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="微博">
+                    <ImageView style="@style/DeskListItemIcon.Bar" android:src="@mipmap/share_wb" />
+                    <TextView style="@style/DeskListItemText.Bar" android:text="微博"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <ImageView
+            android:id="@+id/rightBar"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_right_bar" />
+    </LinearLayout>
+    <RelativeLayout style="@style/MainMatch" android:id="@+id/bottomLayout" android:background="#71888888">
+        <LinearLayout style="@style/MainWrap.Vertical" android:id="@+id/deskList">
+            <LinearLayout style="@style/DeskListBox">
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="QQ">
+                    <ImageView style="@style/DeskListItemIcon" android:src="@mipmap/share_qq" />
+                </LinearLayout>
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="微信">
+                    <ImageView style="@style/DeskListItemIcon" android:src="@mipmap/share_wx" />
+                </LinearLayout>
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="QQ空间">
+                    <ImageView style="@style/DeskListItemIcon" android:src="@mipmap/share_qz" />
+                </LinearLayout>
+                <LinearLayout style="@style/DeskListItem" android:onClick="showTag" android:tag="微博">
+                    <ImageView style="@style/DeskListItemIcon" android:src="@mipmap/share_wb" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout style="@style/MainMatch" android:id="@+id/deskMain" android:background="#FFFFFF" android:visibility="gone" android:alpha="0">
+            <RelativeLayout style="@style/MainMatch">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/soLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:orientation="vertical"
+                    app:cardUseCompatPadding="false"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="78.5dp"
+                        android:orientation="horizontal"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:inputType="text"
+                            android:background="@null"
+                            android:textSize="16sp"
+                            android:textColor="#000000"
+                            android:lines="1"
+                            android:gravity="center"
+                            android:layout_gravity="bottom|center"
+                            android:singleLine="true"
+                            android:hint="Search Apps" />
+                    </LinearLayout>
+                    <View
+                        android:id="@+id/soBorder"
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/colorPrimary"
+                        android:alpha="1"
+                        android:layout_gravity="bottom" />
+                </androidx.cardview.widget.CardView>
+                <cn.leaqi.drawerapp.Views.NewScrollView
+                    android:id="@+id/mainScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/soLayout">
+                    <cn.leaqi.drawerapp.Views.NewGridView
+                        style="@style/DeskListBox"
+                        android:id="@+id/mainList"
+                        android:animateLayoutChanges="true"
+                        android:clipToPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:verticalSpacing="20dp"
+                        android:stretchMode="columnWidth"
+                        android:scrollbars="none"
+                        android:numColumns="4" />
+                </cn.leaqi.drawerapp.Views.NewScrollView>
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <FrameLayout style="@style/MainMatch" android:id="@+id/mainLayout">
+        <androidx.viewpager.widget.ViewPager style="@style/MainMatch" android:id="@+id/mainView" />
+        <include layout="@layout/top_bar_white" />
+        <ImageView
+            android:id="@+id/iconUp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="95dp"
+            android:src="@mipmap/icon_down_up" />
+    </FrameLayout>
+</cn.leaqi.drawer.SwipeDrawer>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DeskListItem">
+    <ImageView style="@style/DeskListItemIcon" android:src="@mipmap/icon_round" />
+    <TextView
+        style="@style/DeskListItemText"
+        android:id="@+id/item_title" />
+</LinearLayout>

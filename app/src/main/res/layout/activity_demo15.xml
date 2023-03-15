@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.leaqi.drawer.SwipeDrawer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MainMatch.Vertical"
+    android:id="@+id/rootDrawer"
+    app:mode="cover"
+    app:mask="gradual"
+    app:maskColor="#80FFFFFF"
+    app:shrinkRange="8"
+    app:scrollOuterDrag="true"
+    app:bottomOffset="210dp"
+    app:bottomDragRange="170dp"
+    app:bottomScroll="@+id/subScroll"
+    app:bottomLayout="@+id/bottomLayout">
+    <RelativeLayout style="@style/MainMatch" android:id="@+id/bottomLayout">
+        <FrameLayout
+            android:id="@+id/subTop"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="20dp">
+            <ImageView
+                android:id="@+id/subIcon"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/btn_mid" />
+        </FrameLayout>
+        <ScrollView style="@style/MainMatch" android:layout_below="@+id/subTop" android:id="@+id/subScroll" android:paddingTop="10dp" android:scrollbars="none" android:background="@drawable/radius_white_top">
+            <LinearLayout style="@style/MainWrap.Vertical" android:paddingTop="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:gravity="start|center"
+                            android:textSize="20sp"
+                            android:textColor="#333333"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textStyle="bold"
+                            android:onClick="showText"
+                            android:text="光谷广场"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:gravity="start|center"
+                            android:textSize="12sp"
+                            android:textColor="#999999"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:onClick="showText"
+                            android:text="武汉市洪山区东湖新技术开发区珞喻路与民族大道交叉口"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="end|center"
+                        android:onClick="showTag"
+                        android:tag="导航">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/icon_go" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout style="@style/MainWrap.Vertical" android:layout_height="0dp" android:id="@+id/moreList">
+                    <View style="@style/LineList" />
+                    <TextView style="@style/TitleList" android:text="分享" />
+                    <LinearLayout style="@style/AppListBox">
+                        <LinearLayout style="@style/AppListItem" android:tag="QQ">
+                            <ImageView style="@style/AppListItemIcon" android:src="@mipmap/share_qq" />
+                            <TextView style="@style/AppListItemText" android:text="QQ" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/AppListItem" android:tag="微信">
+                            <ImageView style="@style/AppListItemIcon" android:src="@mipmap/share_wx" />
+                            <TextView style="@style/AppListItemText" android:text="微信" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/AppListItem" android:tag="QQ空间">
+                            <ImageView style="@style/AppListItemIcon" android:src="@mipmap/share_qz" />
+                            <TextView style="@style/AppListItemText" android:text="QQ空间" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/AppListItem" android:tag="微博">
+                            <ImageView style="@style/AppListItemIcon" android:src="@mipmap/share_wb" />
+                            <TextView style="@style/AppListItemText" android:text="微博" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/AppListItem" android:tag="朋友圈">
+                            <ImageView style="@style/AppListItemIcon" android:src="@mipmap/share_pyq" />
+                            <TextView style="@style/AppListItemText" android:text="朋友圈" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <View style="@style/LineList" />
+                </LinearLayout>
+                <TextView style="@style/TitleList" android:text="附近" android:layout_height="0dp" android:id="@+id/titleList" />
+                <LinearLayout style="@style/TextListBox">
+                    <LinearLayout style="@style/TextListItem">
+                        <ImageView style="@style/TextListItemIcon" android:src="@mipmap/icon_location" />
+                        <TextView style="@style/TextListItemText" android:text="世界城光谷步行街" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/TextListItem">
+                        <ImageView style="@style/TextListItemIcon" android:src="@mipmap/icon_location" />
+                        <TextView style="@style/TextListItemText" android:text="华中科技大学" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout style="@style/TextListBox">
+                    <LinearLayout style="@style/TextListItem">
+                        <ImageView style="@style/TextListItemIcon" android:src="@mipmap/icon_location" />
+                        <TextView style="@style/TextListItemText" android:text="中商·世界里(鲁巷广场购物中心)" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/TextListItem">
+                        <ImageView style="@style/TextListItemIcon" android:src="@mipmap/icon_location" />
+                        <TextView style="@style/TextListItemText" android:text="武汉工程大学(武昌校区)" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout style="@style/MainWrap.Vertical" android:layout_marginTop="15dp" android:visibility="gone" android:id="@+id/bottomList">
+                    <View style="@style/LineList" />
+                    <TextView style="@style/TitleList" android:text="酒店" />
+                    <ImageView style="@style/EmptyList" />
+                    <View style="@style/LineList" />
+                    <TextView style="@style/TitleList" android:text="停车" />
+                    <ImageView style="@style/EmptyList" />
+                    <View style="@style/LineList" />
+                    <TextView style="@style/TitleList" android:text="景点" />
+                    <ImageView style="@style/EmptyList" />
+                    <View style="@style/LineList" />
+                    <TextView style="@style/TitleList" android:text="美食" />
+                    <ImageView style="@style/EmptyList" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <View android:layout_width="match_parent" android:layout_height="20dp" android:layout_marginTop="40dp" android:background="@drawable/radius_gradient_top" />
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/MainMatch" android:id="@+id/mainLayout">
+        <RelativeLayout style="@style/MainMatch" android:layout_marginBottom="160dp">
+            <ImageView style="@style/MainMatch" android:scaleType="centerCrop" android:src="@mipmap/map_bg" />
+        </RelativeLayout>
+        <include layout="@layout/top_bar_black" />
+    </RelativeLayout>
+</cn.leaqi.drawer.SwipeDrawer>

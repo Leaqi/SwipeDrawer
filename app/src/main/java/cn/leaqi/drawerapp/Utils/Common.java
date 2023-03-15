@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -218,6 +219,17 @@ public class Common {
      */
     public static void showToast(String text) {
         Toast.makeText(AppData.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 设置View高度
+     * @param view View
+     * @param dp Dip
+     */
+    public static void setHeight(View view, float dp) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.height = dipToPx(AppData.getContext(), dp);
+        view.setLayoutParams(params);
     }
 
     /**

@@ -76,6 +76,11 @@ class ViewUtils {
         }
     }
 
+    void setOffset(float x, float y) {
+        view.setTranslationX(x);
+        view.setTranslationY(y);
+    }
+
     void setLeft(int l) {
         left = l;
         view.setLeft(left);

@@ -1,6 +1,7 @@
 package cn.leaqi.drawerapp;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import cn.leaqi.drawerapp.Utils.Common;
 import cn.leaqi.drawerapp.Views.TopBar;
 import cn.leaqi.drawer.SwipeDrawer;
@@ -18,12 +21,16 @@ import cn.leaqi.drawer.OnDrawerState;
 public class Demo9Activity extends Activity {
     TopBar topBar = null;
     SwipeDrawer rootDrawer = null;
+    View topLayout = null;
+    int rootWidth = 0;
+    int rootHeight = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo9);
         rootDrawer = findViewById(R.id.rootDrawer);
+        topLayout = findViewById(R.id.topLayout);
         topBar = new TopBar(this); // 头部操作类
         topBar.setTitle("顶部弹出"); // 头部标题
         AppInit();
@@ -41,19 +48,22 @@ public class Demo9Activity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        upHeight();
+    }
+
     private void AppInit() {
         final View mask = findViewById(R.id.mask); // 自定义主布局遮罩
         final View topMask  = findViewById(R.id.topMask); // 自定义Top布局遮罩
         final GridView gridView = findViewById(R.id.gridView); // Top布局GridView
-        final View topLayout = findViewById(R.id.topLayout);
         topLayout.post(new Runnable() {
             @Override
             public void run() {
-                // 更新高度
-                ViewGroup.LayoutParams getLp = topLayout.getLayoutParams();
-                getLp.height = rootDrawer.getMeasuredHeight() - topBar.getHeight();
-                topLayout.setLayoutParams(getLp);
-                rootDrawer.requestLayout();
+                rootWidth = rootDrawer.getMeasuredWidth();
+                rootHeight = rootDrawer.getMeasuredHeight();
+                upHeight();
             }
         });
 
@@ -110,6 +120,15 @@ public class Demo9Activity extends Activity {
             @Override
             public void onCancel(int type) { }
         });
+    }
+
+    // 更新高度
+    public void upHeight() {
+        int getHeight = topBar.getHorizontal() ? rootWidth : rootHeight;
+        ViewGroup.LayoutParams getLp = topLayout.getLayoutParams();
+        getLp.height = getHeight - topBar.getHeight();
+        topLayout.setLayoutParams(getLp);
+        rootDrawer.requestLayout();
     }
 
     /**

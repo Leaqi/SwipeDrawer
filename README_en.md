@@ -1,4 +1,4 @@
-# SwipeDrawer  &middot; [![Star](https://img.shields.io/github/stars/Leaqi/SwipeDrawer?color=fb6698&label=Star "Star")](https://github.com/Leaqi/SwipeDrawer/stargazers "Star") [![Fork](https://img.shields.io/github/forks/Leaqi/SwipeDrawer?color=2196f3&label=Fork "Fork")](https://github.com/Leaqi/SwipeDrawer/network/members "Fork") [![API](https://img.shields.io/badge/API-14%2B-04d8bb "API")](https://github.com/Leaqi/SwipeDrawer/ "API") [![JitPack](https://jitpack.io/v/Leaqi/SwipeDrawer.svg "JitPack")](https://jitpack.io/#cn.Leaqi/SwipeDrawer "JitPack") [![Release](https://img.shields.io/github/v/release/Leaqi/SwipeDrawer?label=Release&color=06da47 "Release")](https://github.com/Leaqi/SwipeDrawer/releases "Release") [![License](https://img.shields.io/badge/License-Apache--2.0-e0b003 "License")](https://github.com/Leaqi/SwipeDrawer/blob/main/LICENSE "License") [![Download Demo Apk](https://img.shields.io/badge/Download-Demo%20Apk-45c703 "Download Demo Apk")](https://github.com/Leaqi/SwipeDrawer/releases/download/1.4/demo.apk "Download Demo Apk")
+# SwipeDrawer  &middot; [![Star](https://img.shields.io/github/stars/Leaqi/SwipeDrawer?color=fb6698&label=Star "Star")](https://github.com/Leaqi/SwipeDrawer/stargazers "Star") [![Fork](https://img.shields.io/github/forks/Leaqi/SwipeDrawer?color=2196f3&label=Fork "Fork")](https://github.com/Leaqi/SwipeDrawer/network/members "Fork") [![API](https://img.shields.io/badge/API-14%2B-04d8bb "API")](https://github.com/Leaqi/SwipeDrawer/ "API") [![JitPack](https://jitpack.io/v/Leaqi/SwipeDrawer.svg "JitPack")](https://jitpack.io/#cn.Leaqi/SwipeDrawer "JitPack") [![Release](https://img.shields.io/github/v/release/Leaqi/SwipeDrawer?label=Release&color=06da47 "Release")](https://github.com/Leaqi/SwipeDrawer/releases "Release") [![License](https://img.shields.io/badge/License-Apache--2.0-e0b003 "License")](https://github.com/Leaqi/SwipeDrawer/blob/main/LICENSE "License") [![Download Demo Apk](https://img.shields.io/badge/Download-Demo%20Apk-45c703 "Download Demo Apk")](https://github.com/Leaqi/SwipeDrawer/releases/download/1.5/demo.apk "Download Demo Apk")
 #### English README | [中文 README](https://github.com/Leaqi/SwipeDrawer/ "中文 README")
 Android SwipeDrawer sliding drawer library can add up, down, left and right drawer layouts at the same time. There are three drawer opening modes: drawer mode, overlay mode and fixed mode. It supports unlimited nesting and edge sliding opening. Swipedrawer can also be used as a drop-down refresh layout, and supports listview, recyclerview, GridView, Scrollview, etc.
 
@@ -22,7 +22,7 @@ Add `SwipeDrawer` dependencies：
 
     dependencies {
         ...
-        implementation 'cn.Leaqi:SwipeDrawer:1.4'
+        implementation 'cn.Leaqi:SwipeDrawer:1.5'
     }
 
 Add `SwipeDrawer` to the layout file ：

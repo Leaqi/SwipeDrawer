@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainWrap.Vertical"
+    android:id="@+id/top_bar">
+    <View
+        android:id="@+id/top_status"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <LinearLayout
+        android:id="@+id/top_head"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/top_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:visibility="gone"
+            android:gravity="center">
+            <View
+                android:id="@+id/top_left_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/top_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lines="1"
+            android:ellipsize="end"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="0dp"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/app_name"/>
+        <ImageView
+            android:id="@+id/top_rotate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:src="@mipmap/icon_rotate_black" />
+        <TextView
+            android:id="@+id/top_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
+            android:visibility="gone"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+        <LinearLayout
+            android:id="@+id/top_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:visibility="gone"
+            android:gravity="center">
+            <View
+                android:id="@+id/top_right_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

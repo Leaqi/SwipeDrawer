@@ -23,6 +23,7 @@ public class TopBar {
     private Activity mActivity;
 
     private int statusHeight = 0;
+    private boolean isHorizontal = false;
     private View topBar;
     private View topStatus;
     private View topHead;
@@ -90,6 +91,15 @@ public class TopBar {
         }
     }
 
+    public void setNavigationColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View stateView = mActivity.getWindow().getDecorView();
+            int ui = stateView.getSystemUiVisibility();
+            ui |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            stateView.setSystemUiVisibility(ui);
+        }
+    }
+
     private void setStatusTop(boolean isStatus){
         try {
             int resourceId = mContext.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -111,14 +121,17 @@ public class TopBar {
     }
 
     private void setRotate(){
+        getHorizontal();
         topRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mActivity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-                    mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                } else {
+                getHorizontal();
+                if(isHorizontal){
                     mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                } else {
+                    mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 }
+                getHorizontal();
             }
         });
     }
@@ -195,7 +208,11 @@ public class TopBar {
     }
 
     public void showLeftBack() {
-        showLeft(R.mipmap.icon_back, new TopBar.OnTopClickListener() {
+        showLeftBack(false);
+    }
+
+    public void showLeftBack(boolean isBlack) {
+        showLeft(isBlack ? R.mipmap.icon_back_black : R.mipmap.icon_back, new TopBar.OnTopClickListener() {
             @Override
             public void onClick(View view) {
                 mActivity.finish();
@@ -240,4 +257,10 @@ public class TopBar {
     public View getTopRightIcon() {
         return topRightIcon;
     }
+
+    public boolean getHorizontal() {
+        isHorizontal = mActivity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        return isHorizontal;
+    }
+
 }

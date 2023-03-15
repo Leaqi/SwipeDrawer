@@ -7,8 +7,8 @@ android {
         applicationId "cn.leaqi.drawerapp"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.4"
+        versionCode 5
+        versionName "1.5"
     }
     buildTypes {
         release {

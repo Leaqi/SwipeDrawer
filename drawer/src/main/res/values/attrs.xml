@@ -83,6 +83,10 @@
         <attr name="topLayout" format="reference" />
         <attr name="rightLayout" format="reference" />
         <attr name="bottomLayout" format="reference" />
+        <attr name="leftOffset" format="dimension" />
+        <attr name="topOffset" format="dimension" />
+        <attr name="rightOffset" format="dimension" />
+        <attr name="bottomOffset" format="dimension" />
         <attr name="leftDragOpen" format="boolean" />
         <attr name="topDragOpen" format="boolean" />
         <attr name="rightDragOpen" format="boolean" />
@@ -97,6 +101,10 @@
         <attr name="shrinkRange" format="float" />
         <attr name="dragDamping" format="integer" />
         <attr name="dragRange" format="dimension" />
+        <attr name="leftDragRange" format="dimension" />
+        <attr name="topDragRange" format="dimension" />
+        <attr name="rightDragRange" format="dimension" />
+        <attr name="bottomDragRange" format="dimension" />
         <attr name="dragSlop" format="dimension" />
         <attr name="maxDragSize" format="dimension" />
         <attr name="duration" format="integer" />

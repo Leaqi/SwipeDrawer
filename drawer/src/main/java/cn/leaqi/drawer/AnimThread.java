@@ -25,7 +25,7 @@ import android.view.animation.Interpolator;
  */
 public class AnimThread extends Thread {
 
-    private static int FPS = 100;
+    private static int FPS = 120;
 
     private int setDuration;
     private boolean isStop = false;

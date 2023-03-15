@@ -80,7 +80,6 @@ public class SwipeDrawer extends ViewGroup {
     private int topMode = -1;
     private int rightMode = -1;
     private int bottomMode = -1;
-    private int lastMode = 0;
     private int mainType = 0;
     private int leftType = 0;
     private int topType = 0;
@@ -113,11 +112,19 @@ public class SwipeDrawer extends ViewGroup {
     private float shrinkRange = 5;
     private int dragDamping = 10;
     private int dragRange = 0;
+    private int leftDragRange = 0;
+    private int topDragRange = 0;
+    private int rightDragRange = 0;
+    private int bottomDragRange = 0;
     private int dragSlop = 5;
     private int maxDragSize = 0;
     private int dragCloseType = 0;
     private int duration = 200;
     private int maskColor = -2147483648;
+    private int leftOffset = 0;
+    private int topOffset = 0;
+    private int rightOffset = 0;
+    private int bottomOffset = 0;
     private boolean leftDragOpen = true;
     private boolean topDragOpen = true;
     private boolean rightDragOpen = true;
@@ -144,9 +151,11 @@ public class SwipeDrawer extends ViewGroup {
     private boolean isFinish = false;
     private boolean isTouch = false;
     private boolean isIntercept = false;
+    private boolean isEmploy = false;
     private boolean isShow = false;
     private boolean arriveRange = false;
     private boolean isArriveCall = false;
+    private boolean reLayout = false;
     private boolean isLayout = false;
     private int parentIntercept = 0;
     private int inDirection = -1;
@@ -193,12 +202,20 @@ public class SwipeDrawer extends ViewGroup {
             final float getShrinkRange = attrArr.getFloat(R.styleable.SwipeDrawer_shrinkRange, shrinkRange);
             final int getDragDamping = attrArr.getInteger(R.styleable.SwipeDrawer_dragDamping, dragDamping);
             final int getDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragRange, dragRange);
+            final int getLeftDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_leftDragRange, leftDragRange);
+            final int getTopDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_topDragRange, topDragRange);
+            final int getRightDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_rightDragRange, rightDragRange);
+            final int getBottomDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_bottomDragRange, bottomDragRange);
             final int getDragSlop = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragSlop, dragSlop);
             final int getDragCloseType = attrArr.getInteger(R.styleable.SwipeDrawer_dragCloseType, dragCloseType);
             final int getMaxDragSize = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_maxDragSize, maxDragSize);
             final int getDuration = attrArr.getInteger(R.styleable.SwipeDrawer_duration, duration);
             final int getMaskColor = attrArr.getColor(R.styleable.SwipeDrawer_maskColor, maskColor);
             final int getInterpolatorId = attrArr.getResourceId(R.styleable.SwipeDrawer_interpolator, -1);
+            final int getLeftOffset = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_leftOffset, leftOffset);
+            final int getTopOffset = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_topOffset, topOffset);
+            final int getRightOffset = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_rightOffset, rightOffset);
+            final int getBottomOffset = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_bottomOffset, bottomOffset);
             leftDragOpen = attrArr.getBoolean(R.styleable.SwipeDrawer_leftDragOpen, leftDragOpen);
             topDragOpen = attrArr.getBoolean(R.styleable.SwipeDrawer_topDragOpen, topDragOpen);
             rightDragOpen = attrArr.getBoolean(R.styleable.SwipeDrawer_rightDragOpen, rightDragOpen);
@@ -236,10 +253,18 @@ public class SwipeDrawer extends ViewGroup {
             setShrinkRange(getShrinkRange);
             setDragDamping(getDragDamping);
             setDragRange(getDragRange);
+            setLeftDragRange(getLeftDragRange);
+            setTopDragRange(getTopDragRange);
+            setRightDragRange(getRightDragRange);
+            setBottomDragRange(getBottomDragRange);
             setDragSlop(getDragSlop);
             setMaxDragSize(getMaxDragSize);
             setMaskColor(getMaskColor);
             setDuration(getDuration);
+            setLeftOffset(getLeftOffset);
+            setTopOffset(getTopOffset);
+            setRightOffset(getRightOffset);
+            setBottomOffset(getBottomOffset);
             if (getInterpolatorId != -1) {
                 animInterpolator = AnimationUtils.loadInterpolator(getContext(), getInterpolatorId);
             }
@@ -342,13 +367,33 @@ public class SwipeDrawer extends ViewGroup {
     }
 
     public void setDragDamping(int num) {
-        if (num < 0 || num > 10) num = 10;
+        if (num < 0 || num > 100) num = 10;
         dragDamping = num;
     }
 
     public void setDragRange(int num) {
         if (num < -1) num = -1;
         dragRange = num;
+    }
+
+    public void setLeftDragRange(int num) {
+        if (num < 0) num = 0;
+        leftDragRange = num;
+    }
+
+    public void setTopDragRange(int num) {
+        if (num < 0) num = 0;
+        topDragRange = num;
+    }
+
+    public void setRightDragRange(int num) {
+        if (num < 0) num = 0;
+        rightDragRange = num;
+    }
+
+    public void setBottomDragRange(int num) {
+        if (num < 0) num = 0;
+        bottomDragRange = num;
     }
 
     public void setDragSlop(int num) {
@@ -364,6 +409,46 @@ public class SwipeDrawer extends ViewGroup {
     public void setDuration(int ms) {
         if (ms < 0) return;
         duration = ms;
+    }
+
+    public void setLeftOffset(int num) {
+        if (isShow) return;
+        if (num < 0) num = 0;
+        leftOffset = num;
+        if (isFinish) {
+            checkTouch();
+            updateLayout();
+        }
+    }
+
+    public void setTopOffset(int num) {
+        if (isShow) return;
+        if (num < 0) num = 0;
+        topOffset = num;
+        if (isFinish) {
+            checkTouch();
+            updateLayout();
+        }
+    }
+
+    public void setRightOffset(int num) {
+        if (isShow) return;
+        if (num < 0) num = 0;
+        rightOffset = num;
+        if (isFinish) {
+            checkTouch();
+            updateLayout();
+        }
+    }
+
+    public void setBottomOffset(int num) {
+        if (isShow) return;
+        if (num < 0) num = 0;
+        bottomOffset = num;
+        if (isFinish) {
+            checkTouch();
+            updateLayout();
+        }
     }
 
     public void setLeftDragOpen(boolean bool) {
@@ -614,28 +699,6 @@ public class SwipeDrawer extends ViewGroup {
         allIntercept = bool;
     }
 
-    public static boolean getAllIntercept() {
-        return allIntercept;
-    }
-
-    public static SwipeDrawer getParentDrawer(View view) {
-        try {
-            if (view != null) {
-                ViewParent parent = view.getParent();
-                while (parent != null) {
-                    if (parent instanceof SwipeDrawer) {
-                        return (SwipeDrawer) parent;
-                    } else {
-                        parent = parent.getParent();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public int getMode() {
         return mode;
     }
@@ -720,6 +783,22 @@ public class SwipeDrawer extends ViewGroup {
         return dragRange;
     }
 
+    public int getLeftDragRange() {
+        return leftDragRange;
+    }
+
+    public int getTopDragRange() {
+        return topDragRange;
+    }
+
+    public int getRightDragRange() {
+        return rightDragRange;
+    }
+
+    public int getBottomDragRange() {
+        return bottomDragRange;
+    }
+
     public int getDragSlop() {
         return dragSlop;
     }
@@ -730,6 +809,22 @@ public class SwipeDrawer extends ViewGroup {
 
     public int getDuration() {
         return duration;
+    }
+
+    public int getLeftOffset() {
+        return leftOffset;
+    }
+
+    public int getTopOffset() {
+        return topOffset;
+    }
+
+    public int getRightOffset() {
+        return rightOffset;
+    }
+
+    public int getBottomOffset() {
+        return bottomOffset;
     }
 
     public boolean getLeftDragOpen() {
@@ -792,6 +887,27 @@ public class SwipeDrawer extends ViewGroup {
         return maskColor;
     }
 
+    public static boolean getAllIntercept() {
+        return allIntercept;
+    }
+
+    public static SwipeDrawer getParentDrawer(View view) {
+        try {
+            if (view != null) {
+                ViewParent parent = view.getParent();
+                while (parent != null) {
+                    if (parent instanceof SwipeDrawer) {
+                        return (SwipeDrawer) parent;
+                    } else {
+                        parent = parent.getParent();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public int getDirection(View view) {
         if (mainLayout != null) {
@@ -825,6 +941,19 @@ public class SwipeDrawer extends ViewGroup {
         return mode;
     }
 
+    public int getDragRange(int type) {
+        if (type == DIRECTION_LEFT && leftDragRange != 0) {
+            return leftDragRange;
+        } else if (type == DIRECTION_TOP && topDragRange != 0) {
+            return topDragRange;
+        } else if (type == DIRECTION_RIGHT && rightDragRange != 0) {
+            return rightDragRange;
+        } else if (type == DIRECTION_BOTTOM && bottomDragRange != 0) {
+            return bottomDragRange;
+        }
+        return dragRange;
+    }
+
     public void openDrawer(int type) {
         openDrawer(type, true, true);
     }
@@ -842,18 +971,10 @@ public class SwipeDrawer extends ViewGroup {
                 return;
             }
             inDirection = type;
-            if (getDirectionMode(inDirection) == MODE_COVER) {
-                mainLayout.setFront();
-                requestMask(true);
-                viewUtils.setFront();
-            } else {
-                viewUtils.setFront();
-                requestMask(true);
-                mainLayout.setFront();
-            }
+            frontLayout(viewUtils);
             isShow = true;
             if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_CALL_OPEN, 0);
-            checkView();
+            toggleLayout();
             animRecovery(true, anim, call);
             if (call) onOpen();
             if (mask == MASK_GENERAL) {
@@ -889,7 +1010,7 @@ public class SwipeDrawer extends ViewGroup {
             inDirection = type;
             isShow = false;
             if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_CALL_CLOSE, 0);
-            checkView();
+            toggleLayout();
             animRecovery(false, anim, call);
             if (call) onClose();
             if (mask == MASK_GENERAL) {
@@ -910,7 +1031,7 @@ public class SwipeDrawer extends ViewGroup {
             }
             isShow = false;
             if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_CALL_CLOSE, 0);
-            checkView();
+            toggleLayout();
             animRecovery(false, anim, call);
             if (call) onClose();
             if (mask == MASK_GENERAL) {
@@ -936,7 +1057,7 @@ public class SwipeDrawer extends ViewGroup {
     }
 
     public void updateLayout() {
-        lastMode = 0;
+        reLayout = true;
         requestLayout();
     }
 
@@ -1066,10 +1187,10 @@ public class SwipeDrawer extends ViewGroup {
                 if (bool) {
                     viewUtils = getScrollUtils(type);
                     if (viewUtils != null) {
-                        if (isTop && !viewUtils.isScrollBottom()) bool = false;
-                        if (isBottom && !viewUtils.isScrollTop()) bool = false;
                         if (isLeft && !viewUtils.isScrollRight()) bool = false;
+                        if (isTop && !viewUtils.isScrollBottom()) bool = false;
                         if (isRight && !viewUtils.isScrollLeft()) bool = false;
+                        if (isBottom && !viewUtils.isScrollTop()) bool = false;
                         if (scrollOuterDrag) {
                             if (!viewUtils.isActionDown(downX, downY, getLocation())) {
                                 bool = true;
@@ -1077,10 +1198,10 @@ public class SwipeDrawer extends ViewGroup {
                         }
                     } else {
                         int setType = 0;
-                        if (isTop) setType = topType;
-                        if (isBottom) setType = bottomType;
                         if (isLeft) setType = leftType;
+                        if (isTop) setType = topType;
                         if (isRight) setType = rightType;
+                        if (isBottom) setType = bottomType;
                         if (setType == TYPE_SCROLL_Y) {
                             if (isTop && !drawerUtils.isScrollBottom()) bool = false;
                             if (isBottom && !drawerUtils.isScrollTop()) bool = false;
@@ -1093,10 +1214,10 @@ public class SwipeDrawer extends ViewGroup {
             } else {
                 viewUtils = getScrollUtils(DIRECTION_MAIN);
                 if (viewUtils != null) {
-                    if (isTop && !viewUtils.isScrollTop()) bool = false;
-                    if (isBottom && !viewUtils.isScrollBottom()) bool = false;
                     if (isLeft && !viewUtils.isScrollLeft()) bool = false;
+                    if (isTop && !viewUtils.isScrollTop()) bool = false;
                     if (isRight && !viewUtils.isScrollRight()) bool = false;
+                    if (isBottom && !viewUtils.isScrollBottom()) bool = false;
                 } else {
                     if (mainType == TYPE_SCROLL_Y) {
                         if (isTop && !mainUtils.isScrollTop()) bool = false;
@@ -1113,22 +1234,26 @@ public class SwipeDrawer extends ViewGroup {
 
     private ViewUtils getIntercept(int shiftX, int shiftY) {
         if (leftLayout != null && ((isShow && inDirection == DIRECTION_LEFT && shiftX < 0 && Math.abs(shiftX) > Math.abs(shiftY)) || (!isShow && leftDragOpen && shiftX > Math.abs(shiftY)))) {
-            if (leftLayout.intercept && isScrollType(DIRECTION_LEFT) && (isShow || dragRange == 0 || dragRange >= downX)) {
+            int leftRange = getDragRange(DIRECTION_LEFT);
+            if (leftLayout.intercept && isScrollType(DIRECTION_LEFT) && (isShow || leftRange == 0 || leftRange >= downX)) {
                 return leftLayout;
             }
         }
-        if (rightLayout != null && ((!isShow && rightDragOpen && shiftX < 0 && Math.abs(shiftX) > Math.abs(shiftY)) || (isShow && inDirection == DIRECTION_RIGHT && shiftX > Math.abs(shiftY)))) {
-            if (rightLayout.intercept && isScrollType(DIRECTION_RIGHT) && (isShow || dragRange == 0 || dragRange >= (mainLayout.width - downX))) {
-                return rightLayout;
-            }
-        }
         if (topLayout != null && ((isShow && inDirection == DIRECTION_TOP && shiftY < 0 && Math.abs(shiftY) > Math.abs(shiftX)) || (!isShow && topDragOpen && shiftY > Math.abs(shiftX)))) {
-            if (topLayout.intercept && isScrollType(DIRECTION_TOP) && (isShow || dragRange == 0 || dragRange >= downY)) {
+            int topRange = getDragRange(DIRECTION_TOP);
+            if (topLayout.intercept && isScrollType(DIRECTION_TOP) && (isShow || topRange == 0 || topRange >= downY)) {
                 return topLayout;
             }
         }
+        if (rightLayout != null && ((!isShow && rightDragOpen && shiftX < 0 && Math.abs(shiftX) > Math.abs(shiftY)) || (isShow && inDirection == DIRECTION_RIGHT && shiftX > Math.abs(shiftY)))) {
+            int rightRange = getDragRange(DIRECTION_RIGHT);
+            if (rightLayout.intercept && isScrollType(DIRECTION_RIGHT) && (isShow || rightRange == 0 || rightRange >= (mainLayout.width - downX))) {
+                return rightLayout;
+            }
+        }
         if (bottomLayout != null && ((!isShow && bottomDragOpen && shiftY < 0 && Math.abs(shiftY) > Math.abs(shiftX)) || (isShow && inDirection == DIRECTION_BOTTOM && shiftY > Math.abs(shiftX)))) {
-            if (bottomLayout.intercept && isScrollType(DIRECTION_BOTTOM) && (isShow || dragRange == 0 || dragRange >= (mainLayout.height - downY))) {
+            int bottomRange = getDragRange(DIRECTION_BOTTOM);
+            if (bottomLayout.intercept && isScrollType(DIRECTION_BOTTOM) && (isShow || bottomRange == 0 || bottomRange >= (mainLayout.height - downY))) {
                 return bottomLayout;
             }
         }
@@ -1148,14 +1273,16 @@ public class SwipeDrawer extends ViewGroup {
         final boolean isTop = inDirection == DIRECTION_TOP;
         final boolean isRight = inDirection == DIRECTION_RIGHT;
         final boolean isBottom = inDirection == DIRECTION_BOTTOM;
+        final int offNum = getOffset();
         int setNum = isLeft || isRight ? (isLeft ? leftLayout.width : -rightLayout.width) : (isTop ? topLayout.height : -bottomLayout.height);
         int oldNum = isLeft || isRight ? mainLayout.left : mainLayout.top;
         if (isCover) {
             if (isLeft) oldNum = viewUtils.width + viewUtils.left;
-            if (isRight) oldNum = viewUtils.left - mainLayout.width;
             if (isTop) oldNum = viewUtils.height + viewUtils.top;
+            if (isRight) oldNum = viewUtils.left - mainLayout.width;
             if (isBottom) oldNum = viewUtils.top - mainLayout.height;
         }
+        final int offValue = bool ? 0 : isLeft || isTop ? -offNum : offNum;
         final int oldValue = oldNum;
         final int setValue = (bool ? setNum : 0) - oldValue;
         isIntercept = false;
@@ -1167,7 +1294,7 @@ public class SwipeDrawer extends ViewGroup {
                         @Override
                         public void run() {
                             if (getStop()) return;
-                            int newValue = (int) Math.ceil(setValue * value);
+                            int newValue = (int) Math.ceil((setValue - offValue) * value);
                             if (isLeft || isRight) {
                                 if (isDrawer || isFixed) mainLayout.setLeft(oldValue + newValue);
                                 if (isDrawer || isCover)
@@ -1177,14 +1304,11 @@ public class SwipeDrawer extends ViewGroup {
                                 if (isDrawer || isCover)
                                     viewUtils.setTop(oldValue + newValue + (isTop ? -viewUtils.height : mainLayout.height));
                             }
-                            float progress = (float) Math.abs(oldValue + newValue) / (isLeft || isRight ? viewUtils.width : viewUtils.height);
+                            offsetMove(getMode);
+                            if (isCover && bool && offNum > 0) newValue = (int) Math.ceil(setValue * value);
+                            float progress = (float) Math.abs(oldValue + newValue - (isRight || isBottom ? -offNum : offNum)) / ((isLeft || isRight ? viewUtils.width : viewUtils.height) - offNum);
                             if (lastProgress != progress) {
-                                if (onDrawerState != null && call) {
-                                    onDrawerState.onMove(inDirection, progress);
-                                }
-                                if (onDrawerChange != null && call) {
-                                    onDrawerChange.onChange(SwipeDrawer.this, STATE_PROGRESS, progress);
-                                }
+                                if(call) onMove(progress);
                                 lastProgress = progress;
                             }
                             if (mask == MASK_GRADUAL) {
@@ -1199,6 +1323,7 @@ public class SwipeDrawer extends ViewGroup {
                                 if (onDrawerChange != null && call) {
                                     onDrawerChange.onChange(SwipeDrawer.this, STATE_ANIM_OVER, 0);
                                 }
+                                isEmploy = false;
                             }
                         }
                     });
@@ -1211,18 +1336,22 @@ public class SwipeDrawer extends ViewGroup {
             }
             if (isLeft || isRight) {
                 if (isDrawer || isFixed) mainLayout.setLeft(oldValue + setValue);
-                if (isDrawer || isCover) viewUtils.setLeft(oldValue + setValue + (isLeft ? -viewUtils.width : mainLayout.width));
+                if (isDrawer || isCover) viewUtils.setLeft(oldValue + setValue + (isLeft ? -viewUtils.width : mainLayout.width) - offValue);
             } else if (isTop || isBottom) {
                 if (isDrawer || isFixed) mainLayout.setTop(oldValue + setValue);
-                if (isDrawer || isCover) viewUtils.setTop(oldValue + setValue + (isTop ? -viewUtils.height : mainLayout.height));
+                if (isDrawer || isCover) viewUtils.setTop(oldValue + setValue + (isTop ? -viewUtils.height : mainLayout.height) - offValue);
             }
-            progressMask(isShow ? 1f : 0f);
+            offsetMove(getMode);
+            float progress = isShow ? 1f : 0f;
+            if(call) onMove(progress);
+            progressMask(progress);
             if (!isShow) {
                 requestMask(false);
             }
             if (onDrawerChange != null && call) {
                 onDrawerChange.onChange(SwipeDrawer.this, STATE_ANIM_OVER, 0);
             }
+            isEmploy = false;
         }
         if (isShow && autoClose) autoDrawer = this;
     }
@@ -1243,6 +1372,11 @@ public class SwipeDrawer extends ViewGroup {
         }
     }
 
+    private void onMove(float progress) {
+        if (onDrawerState != null) onDrawerState.onMove(inDirection, progress);
+        if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_PROGRESS, progress);
+    }
+
     private void cacheDrawer(boolean anim) {
         try {
             if (autoClose && autoDrawer != null && autoDrawer != this) {
@@ -1254,12 +1388,92 @@ public class SwipeDrawer extends ViewGroup {
         }
     }
 
-    private void checkView() {
-        if (showLayout) return;
+    private int getOffset() {
+        return getOffset(inDirection);
+    }
+
+    private int getOffset(int type) {
+        int num = 0;
+        if (checkOffset(type)) {
+            switch (type) {
+                case DIRECTION_LEFT:
+                    num = leftOffset;
+                    break;
+                case DIRECTION_TOP:
+                    num = topOffset;
+                    break;
+                case DIRECTION_RIGHT:
+                    num = rightOffset;
+                    break;
+                case DIRECTION_BOTTOM:
+                    num = bottomOffset;
+                    break;
+            }
+        }
+        return num;
+    }
+
+    private void offsetMove(int mode) {
+        if (!showLayout || mode == MODE_COVER) return;
+        int[] directionList = {DIRECTION_LEFT, DIRECTION_TOP, DIRECTION_RIGHT, DIRECTION_BOTTOM};
+        for (int val : directionList) {
+            if (val != inDirection && checkOffset(val)) {
+                ViewUtils viewUtils = getViewUtils(val);
+                if (viewUtils != null)  {
+                    viewUtils.setOffset(mainLayout.left, mainLayout.top);
+                }
+            }
+        }
+    }
+
+    private void frontOffset() {
+        int[] directionList = {DIRECTION_LEFT, DIRECTION_TOP, DIRECTION_RIGHT, DIRECTION_BOTTOM};
+        for (int val : directionList) {
+            ViewUtils viewUtils = getViewUtils(val);
+            if (viewUtils != null && checkOffset(val))  viewUtils.setFront();
+        }
+    }
+
+    private void frontLayout(ViewUtils viewUtils) {
+        int getMode = getDirectionMode(inDirection);
+        if (getMode == MODE_FIXED) {
+            viewUtils.setFront();
+            mainLayout.setFront();
+            frontOffset();
+            requestMask(true);
+        } else {
+            mainLayout.setFront();
+            frontOffset();
+            requestMask(true);
+            viewUtils.setFront();
+        }
+    }
+
+    private void toggleLayout() {
+        if (showLayout || (!isInit && (checkOffset(DIRECTION_LEFT) || checkOffset(DIRECTION_TOP) || checkOffset(DIRECTION_RIGHT) || checkOffset(DIRECTION_BOTTOM)))) return;
         if (leftLayout != null) leftLayout.setVisibility(inDirection == leftLayout.type);
         if (topLayout != null) topLayout.setVisibility(inDirection == topLayout.type);
         if (rightLayout != null) rightLayout.setVisibility(inDirection == rightLayout.type);
         if (bottomLayout != null) bottomLayout.setVisibility(inDirection == bottomLayout.type);
+    }
+
+    private boolean checkOffset(int type) {
+        boolean bool = false;
+        switch (type) {
+            case DIRECTION_LEFT:
+                bool = leftOffset > 0 && leftLayout != null && getDirectionMode(DIRECTION_LEFT) == MODE_COVER;
+                break;
+            case DIRECTION_TOP:
+                bool = topOffset > 0 && topLayout != null && getDirectionMode(DIRECTION_TOP) == MODE_COVER;
+                break;
+            case DIRECTION_RIGHT:
+                bool = rightOffset > 0 && rightLayout != null && getDirectionMode(DIRECTION_RIGHT) == MODE_COVER;
+                break;
+            case DIRECTION_BOTTOM:
+                bool = bottomOffset > 0 && bottomLayout != null && getDirectionMode(DIRECTION_BOTTOM) == MODE_COVER;
+                break;
+        }
+        return bool;
     }
 
     private void checkMask() {
@@ -1289,7 +1503,7 @@ public class SwipeDrawer extends ViewGroup {
     private void checkTouch() {
         if (isFinish) {
             checkMask();
-            checkView();
+            toggleLayout();
             isTouch = mainLayout != null && (leftLayout != null || topLayout != null || rightLayout != null || bottomLayout != null);
             if (isTouch) {
                 mainLayout.setFront();
@@ -1297,6 +1511,7 @@ public class SwipeDrawer extends ViewGroup {
                     mainLayout.setMask(maskView);
                     maskView.setLayoutParams(mainLayout.view.getLayoutParams());
                 }
+                frontOffset();
             }
         }
     }
@@ -1331,17 +1546,10 @@ public class SwipeDrawer extends ViewGroup {
             downX = getX;
             downY = getY;
             isIntercept = true;
+            isEmploy = true;
             inDirection = viewUtils.type;
-            checkView();
-            if (getDirectionMode(inDirection) == MODE_COVER) {
-                mainLayout.setFront();
-                requestMask(true);
-                viewUtils.setFront();
-            } else {
-                viewUtils.setFront();
-                requestMask(true);
-                mainLayout.setFront();
-            }
+            toggleLayout();
+            frontLayout(viewUtils);
             if (onDrawerState != null) onDrawerState.onStart(inDirection);
             if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_START, 0);
             requestIntercept();
@@ -1350,17 +1558,24 @@ public class SwipeDrawer extends ViewGroup {
     }
 
 
-    private void checkRange(ViewUtils viewUtils, boolean isCover, boolean isLeft, boolean isRight, boolean isTop, boolean isBottom) {
+    private void checkRange(ViewUtils viewUtils, boolean isCover) {
         if (shrinkRange == 0) {
             arriveRange = false;
         } else {
+            final boolean isLeft = inDirection == DIRECTION_LEFT;
+            final boolean isTop = inDirection == DIRECTION_TOP;
+            final boolean isRight = inDirection == DIRECTION_RIGHT;
+            final boolean isBottom = inDirection == DIRECTION_BOTTOM;
             int viewSize = isLeft || isRight ? viewUtils.width : viewUtils.height;
             int mainSize = Math.abs(isLeft || isRight ? mainLayout.left : mainLayout.top);
+            int offSize = getOffset();
             if (isCover) {
                 if (isLeft) mainSize = viewUtils.width + viewUtils.left;
-                if (isRight) mainSize = mainLayout.width - viewUtils.left;
                 if (isTop) mainSize = viewUtils.height + viewUtils.top;
+                if (isRight) mainSize = mainLayout.width - viewUtils.left;
                 if (isBottom) mainSize = mainLayout.height - viewUtils.top;
+                mainSize -= offSize;
+                viewSize -= offSize;
             }
             if (isShow) mainSize = viewSize - mainSize;
             arriveRange = mainSize >= Math.round(viewSize / shrinkRange);
@@ -1450,7 +1665,7 @@ public class SwipeDrawer extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!isTouch || (!dragClose && isShow) || (parentIntercept == 1 && !isShow) || parentIntercept == 2 || allIntercept) return super.onInterceptTouchEvent(ev);
+        if (isEmploy || !isTouch || (!dragClose && isShow) || (parentIntercept == 1 && !isShow) || parentIntercept == 2 || allIntercept) return super.onInterceptTouchEvent(ev);
         final int getX = (int) ev.getX();
         final int getY = (int) ev.getY();
         final int getMs = (int) ev.getEventTime();
@@ -1502,6 +1717,7 @@ public class SwipeDrawer extends ViewGroup {
                     }
                 }
                 isIntercept = false;
+                isEmploy = false;
                 getPointerId = INVALID_POINTER;
                 getLastMoveX = 0;
                 getLastMoveY = 0;
@@ -1525,6 +1741,7 @@ public class SwipeDrawer extends ViewGroup {
         final boolean isTop = inDirection == DIRECTION_TOP;
         final boolean isRight = inDirection == DIRECTION_RIGHT;
         final boolean isBottom = inDirection == DIRECTION_BOTTOM;
+        final int offNum = getOffset();
         final int getIndex = ev.getActionIndex();
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
@@ -1539,10 +1756,10 @@ public class SwipeDrawer extends ViewGroup {
                     if (viewUtils != null) {
                         final int moveX = (int) ev.getX(activePointerIndex);
                         final int moveY = (int) ev.getY(activePointerIndex);
-                        final int viewSize = isLeft || isRight ? viewUtils.width : viewUtils.height;
                         final int mainSize = isLeft || isRight ? mainLayout.width : mainLayout.height;
-                        final int newSize = maxDragSize > 0 && !isShow ? maxDragSize : viewSize;
-                        final float getDamping = dragDamping > 0 && dragDamping < 10 ? (float)dragDamping / 10 : 1;
+                        final int viewSize = isLeft || isRight ? viewUtils.width : viewUtils.height;
+                        final int newSize = (maxDragSize > 0 && !isShow ? maxDragSize : viewSize) - offNum;
+                        final float getDamping = dragDamping > 0 && dragDamping < 100 ? (float)dragDamping / 10 : 1;
                         getLastShiftX = moveX - downX + getLastMoveX;
                         getLastShiftY = moveY - downY + getLastMoveY;
                         int moveSize = isLeft || isRight ? getLastShiftX : getLastShiftY;
@@ -1564,17 +1781,17 @@ public class SwipeDrawer extends ViewGroup {
                         } else {
                             if (isLeft || isRight) {
                                 if (isDrawer || isFixed) mainLayout.setLeft(moveSize);
-                                if (isDrawer || isCover) viewUtils.setLeft(moveSize + (isLeft ? -viewSize : mainSize));
+                                if (isDrawer || isCover) viewUtils.setLeft(moveSize + (isLeft ? -viewSize + offNum : mainSize - offNum));
                             } else if (isTop || isBottom) {
                                 if (isDrawer || isFixed) mainLayout.setTop(moveSize);
-                                if (isDrawer || isCover) viewUtils.setTop(moveSize + (isTop ? -viewSize : mainSize));
+                                if (isDrawer || isCover) viewUtils.setTop(moveSize + (isTop ? -viewSize + offNum : mainSize - offNum));
                             }
                         }
-                        checkRange(viewUtils, isCover, isLeft, isRight, isTop, isBottom);
-                        final float progress = (float) Math.abs(moveSize) / (isLeft || isRight ? viewUtils.width : viewUtils.height);
+                        offsetMove(getMode);
+                        checkRange(viewUtils, isCover);
+                        final float progress = (float) Math.abs(moveSize) / (viewSize - offNum);
                         if (lastProgress != progress) {
-                            if (onDrawerState != null) onDrawerState.onMove(inDirection, isShow ? (1 - progress) : progress);
-                            if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_PROGRESS, isShow ? (1 - progress) : progress);
+                            onMove(isShow ? (1 - progress) : progress);
                             lastProgress = progress;
                         }
                         if (onDrawerChange != null) {
@@ -1602,7 +1819,7 @@ public class SwipeDrawer extends ViewGroup {
                 if (isIntercept) {
                     final ViewUtils viewUtils = getViewUtils(inDirection);
                     if (viewUtils != null) {
-                        checkRange(viewUtils, isCover, isLeft, isRight, isTop, isBottom);
+                        checkRange(viewUtils, isCover);
                         if (shrinkRange == 0) {
                             animRecovery(isShow, true, true);
                             if (onDrawerState != null) onDrawerState.onCancel(inDirection);
@@ -1701,7 +1918,7 @@ public class SwipeDrawer extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View view = getChildAt(i);
             if (view.getVisibility() != GONE) {
-                if ((view.getLeft() == 0 && view.getTop() == 0 && view.getRight() == 0 && view.getBottom() == 0) || lastMode != mode || isLayout) {
+                if ((view.getLeft() == 0 && view.getTop() == 0 && view.getRight() == 0 && view.getBottom() == 0) || reLayout || isLayout) {
                     int setLeft = 0;
                     int setTop = 0;
                     int setRight = view.getMeasuredWidth();
@@ -1709,18 +1926,19 @@ public class SwipeDrawer extends ViewGroup {
                     if (isTouch) {
                         int getDirection = getDirection(view);
                         int getMode = getDirectionMode(getDirection);
+                        int offNum = getOffset(getDirection);
                         if (getMode == MODE_DRAWER || getMode == MODE_COVER) {
                             if (getDirection == DIRECTION_LEFT) {
-                                setLeft = -setRight;
-                                setRight = 0;
+                                setLeft = -setRight + offNum;
+                                setRight = offNum;
                             } else if (getDirection == DIRECTION_RIGHT) {
-                                setLeft = mainLayout.width;
+                                setLeft = mainLayout.width - offNum;
                                 setRight += setLeft;
                             } else if (getDirection == DIRECTION_TOP) {
-                                setTop = -setBottom;
-                                setBottom = 0;
+                                setTop = -setBottom + offNum;
+                                setBottom = offNum;
                             } else if (getDirection == DIRECTION_BOTTOM) {
-                                setTop = mainLayout.height;
+                                setTop = mainLayout.height - offNum;
                                 setBottom += setTop;
                             }
                         } else {
@@ -1747,8 +1965,8 @@ public class SwipeDrawer extends ViewGroup {
             openDrawer(open, false, false);
             open = 0;
         }
-        if (lastMode != mode) {
-            lastMode = mode;
+        if (reLayout) {
+            reLayout = false;
         }
         if (parentId != -1) {
             setParentDrawer(parentId);
