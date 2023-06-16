@@ -106,6 +106,7 @@
         <attr name="rightDragRange" format="dimension" />
         <attr name="bottomDragRange" format="dimension" />
         <attr name="dragSlop" format="dimension" />
+        <attr name="turnCancel" format="dimension" />
         <attr name="maxDragSize" format="dimension" />
         <attr name="duration" format="integer" />
         <attr name="interpolator" format="reference" />

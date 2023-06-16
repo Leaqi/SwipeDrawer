@@ -11,6 +11,7 @@
         app:duration="500"
         app:shrinkRange="1"
         app:dragDamping="5"
+        app:turnCancel="0dp"
         app:maxDragSize="200dp"
         app:mainScroll="@+id/mainList"
         app:topLayout="@+id/topLayout"

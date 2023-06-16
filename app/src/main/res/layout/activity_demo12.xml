@@ -10,6 +10,7 @@
         android:background="#f9f9f9"
         app:shrinkRange="1.2"
         app:dragDamping="4"
+        app:turnCancel="0dp"
         app:maxDragSize="200dp"
         app:mainScroll="@+id/mainList"
         app:topLayout="@+id/topLayout"

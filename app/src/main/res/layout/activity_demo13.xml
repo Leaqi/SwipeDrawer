@@ -11,6 +11,7 @@
         app:duration="360"
         app:shrinkRange="1"
         app:dragDamping="4"
+        app:turnCancel="0dp"
         app:maxDragSize="120dp"
         app:dragClose="false"
         app:interpolator="@android:anim/anticipate_overshoot_interpolator"

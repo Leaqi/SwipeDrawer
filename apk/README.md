@@ -1,4 +1,4 @@
-# Demo-App &middot; [![下载APK](https://img.shields.io/badge/Download-Demo%20Apk-45c703 "下载APK")](https://github.com/Leaqi/SwipeDrawer/releases/download/1.5/demo.apk "下载APK")
+# Demo-App &middot; [![下载APK](https://img.shields.io/badge/Download-Demo%20Apk-45c703 "下载APK")](https://github.com/Leaqi/SwipeDrawer/releases/download/1.6/demo.apk "下载APK")
 ## 图片预览 &middot; [![查看更多](https://img.shields.io/badge/More-%E6%9F%A5%E7%9C%8B%E6%9B%B4%E5%A4%9A-blue "查看更多")](https://Leaqi.github.io/SwipeDrawer/pics.html "查看更多")
 ### Demo Home:
 [![Demo Home](https://p.ssl.qhimg.com/t01b36f1353d11068a0.jpg "Demo Home")](https://Leaqi.github.io/SwipeDrawer/pics.html "Demo Home")

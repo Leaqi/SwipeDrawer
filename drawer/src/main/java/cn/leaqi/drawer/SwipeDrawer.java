@@ -117,6 +117,7 @@ public class SwipeDrawer extends ViewGroup {
     private int rightDragRange = 0;
     private int bottomDragRange = 0;
     private int dragSlop = 5;
+    private int turnCancel = 10;
     private int maxDragSize = 0;
     private int dragCloseType = 0;
     private int duration = 200;
@@ -141,6 +142,9 @@ public class SwipeDrawer extends ViewGroup {
     private int downX = 0;
     private int downY = 0;
     private int downMs = 0;
+    private int moveSize = 0;
+    private int lastSize = 0;
+    private int turnSize = 0;
     private int getPointerId = INVALID_POINTER;
     private int getLastMoveX = 0;
     private int getLastMoveY = 0;
@@ -207,6 +211,7 @@ public class SwipeDrawer extends ViewGroup {
             final int getRightDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_rightDragRange, rightDragRange);
             final int getBottomDragRange = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_bottomDragRange, bottomDragRange);
             final int getDragSlop = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_dragSlop, dragSlop);
+            final int getTurnCancel = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_turnCancel, turnCancel);
             final int getDragCloseType = attrArr.getInteger(R.styleable.SwipeDrawer_dragCloseType, dragCloseType);
             final int getMaxDragSize = attrArr.getDimensionPixelSize(R.styleable.SwipeDrawer_maxDragSize, maxDragSize);
             final int getDuration = attrArr.getInteger(R.styleable.SwipeDrawer_duration, duration);
@@ -258,6 +263,7 @@ public class SwipeDrawer extends ViewGroup {
             setRightDragRange(getRightDragRange);
             setBottomDragRange(getBottomDragRange);
             setDragSlop(getDragSlop);
+            setTurnCancel(getTurnCancel);
             setMaxDragSize(getMaxDragSize);
             setMaskColor(getMaskColor);
             setDuration(getDuration);
@@ -399,6 +405,11 @@ public class SwipeDrawer extends ViewGroup {
     public void setDragSlop(int num) {
         if (num < 0) num = 0;
         dragSlop = num;
+    }
+
+    public void setTurnCancel(int num) {
+        if (num < 0) num = 0;
+        turnCancel = num;
     }
 
     public void setMaxDragSize(int num) {
@@ -801,6 +812,10 @@ public class SwipeDrawer extends ViewGroup {
 
     public int getDragSlop() {
         return dragSlop;
+    }
+
+    public int getTurnCancel() {
+        return turnCancel;
     }
 
     public int getMaxDragSize() {
@@ -1579,6 +1594,18 @@ public class SwipeDrawer extends ViewGroup {
             }
             if (isShow) mainSize = viewSize - mainSize;
             arriveRange = mainSize >= Math.round(viewSize / shrinkRange);
+            if (turnCancel > 0) {
+                final boolean isReverse = isShow ? (isRight || isBottom) : (isLeft || isTop);
+                if ((isReverse && moveSize <= lastSize) || (!isReverse && moveSize >= lastSize)) {
+                    turnSize += isReverse ? lastSize - moveSize : moveSize - lastSize;
+                    if (turnSize > turnCancel) {
+                        arriveRange = false;
+                    }
+                } else {
+                    turnSize = 0;
+                }
+                lastSize = moveSize;
+            }
         }
     }
 
@@ -1762,7 +1789,7 @@ public class SwipeDrawer extends ViewGroup {
                         final float getDamping = dragDamping > 0 && dragDamping < 100 ? (float)dragDamping / 10 : 1;
                         getLastShiftX = moveX - downX + getLastMoveX;
                         getLastShiftY = moveY - downY + getLastMoveY;
-                        int moveSize = isLeft || isRight ? getLastShiftX : getLastShiftY;
+                        moveSize = isLeft || isRight ? getLastShiftX : getLastShiftY;
                         moveSize *= getDamping;
                         if ((((isLeft || isTop) && ((isShow && moveSize > 0) || (!isShow && moveSize < 0)))) || (((isRight || isBottom) && ((isShow && moveSize < 0) || (!isShow && moveSize > 0))))) moveSize = 0;
                         if (Math.abs(moveSize) >= newSize) {
@@ -1820,11 +1847,7 @@ public class SwipeDrawer extends ViewGroup {
                     final ViewUtils viewUtils = getViewUtils(inDirection);
                     if (viewUtils != null) {
                         checkRange(viewUtils, isCover);
-                        if (shrinkRange == 0) {
-                            animRecovery(isShow, true, true);
-                            if (onDrawerState != null) onDrawerState.onCancel(inDirection);
-                            if (onDrawerChange != null) onDrawerChange.onChange(this, STATE_CANCEL, 0);
-                        } else if (arriveRange) {
+                        if (arriveRange && shrinkRange > 0) {
                             isShow = !isShow;
                             animRecovery(isShow, true, true);
                             if (isShow) {
